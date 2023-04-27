@@ -1,6 +1,6 @@
-import responseHandler from "../handlers/response.handler";
-import watchlistModel from "../models/watchlist.model";
-import userModel from "../models/user.model";
+import responseHandler from "../handlers/response.handler.js";
+import watchlistModel from "../models/watchlist.model.js";
+import userModel from "../models/user.model.js";
 
 const createWatchList = async (req, res) => {
   try {

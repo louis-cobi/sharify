@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import modelOptions from "./model.option";
+import modelOptions from "./model.option.js";
 
 const watchListSchema = new mongoose.Schema(
   {

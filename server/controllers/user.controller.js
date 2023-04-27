@@ -1,21 +1,24 @@
-import userModel from "../models/user.model";
+import userModel from "../models/user.model.js";
 import jsonwebtoken from "jsonwebtoken";
-import responseHandler from "../handlers/response.handler";
+import responseHandler from "../handlers/response.handler.js";
+import bcrypt from "bcrypt";
 
 const signup = async (req, res) => {
   try {
-    const { username, password, displaName } = req.body;
+    const { username, password , email} = req.body;
 
-    const checkUser = await userModel.findOne({ username });
+    const checkUser = await userModel.findOne({ email });
 
     if (checkUser)
       return responseHandler.badrequest(res, "username already used");
 
     const user = new userModel();
 
-    user.displayName = displaName;
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
     user.username = username;
-    user.setPassword(password);
+    user.email = email
+    user.password = hash;
 
     await user.save();
 
@@ -25,7 +28,9 @@ const signup = async (req, res) => {
       { expiresIn: "24h" }
     );
 
-    responseHandler.created(res, {
+    user.password = undefined;
+    
+    return responseHandler.created(res, {
       token,
       ...user._doc,
       id: user.id,
@@ -41,11 +46,13 @@ const signin = async (req, res) => {
 
     const user = await userModel
       .findOne({ username })
-      .select("username password salt id displayName");
+      .select("username password id image");
 
     if (!user) return responseHandler.badrequest(res, "User not exist");
 
-    if (!user.validPassword(password))
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch)
       return responseHandler.badrequest(res, "Wrong password");
 
     const token = jsonwebtoken.sign(
@@ -55,7 +62,6 @@ const signin = async (req, res) => {
     );
 
     user.password = undefined;
-    user.salt = undefined;
 
     responseHandler.created(res, {
       token,
@@ -73,14 +79,18 @@ const updatePassword = async (req, res) => {
 
     const user = await userModel
       .findById(req.user.id)
-      .select("password is salt");
+      .select("password id");
 
     if (!user) return responseHandler.unauthorize(res);
 
-    if (!user.validPassword(password))
+    const passwordMatch = await bcrypt.compare(newPassword, user.password);
+
+    if (!passwordMatch)
       return responseHandler.badrequest(res, "Wrong password");
 
-    user.setPassword(newPassword);
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(password, salt);
+    user.password = hash;
 
     await user.save();
 
@@ -97,7 +107,6 @@ const searchUser = async (req, res) => {
     const users = await userModel.find({
       $or: [
         { username: { $regex: searchText, $options: "i" } },
-        { displayName: { $regex: searchText, $options: "i" } },
         { email: { $regex: searchText, $options: "i" } },
       ],
     });

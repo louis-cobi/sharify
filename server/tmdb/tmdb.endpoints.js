@@ -13,14 +13,14 @@ const tmdbEndpoints = {
     mediaCredits: ({ mediaType, mediaId }) => tmdbConfig.getUrl(
         `${mediaType}/${mediaId}/credits`
     ),
-    mediaVideo: ({ mediaType, mediaId }) => tmdbConfig.getUrl(
+    mediaVideos: ({ mediaType, mediaId }) => tmdbConfig.getUrl(
         `${mediaType}/${mediaId}/videos`
     ),
-    mediaRecommand: ({ mediaType, mediaId }) => tmdbConfig.getUrl(
-        `${mediaType}/${mediaId}/images`
+    mediaRecommend: ({ mediaType, mediaId }) => tmdbConfig.getUrl(
+        `${mediaType}/${mediaId}/recommendations`
     ),
     mediaImages: ({ mediaType, mediaId }) => tmdbConfig.getUrl(
-        `${mediaType}/${mediaId}/recommendations`
+        `${mediaType}/${mediaId}/images`
     ),
     mediaSearch: ({ mediaType, query, page }) => tmdbConfig.getUrl(
         `search/${mediaType}`, { query, page }
@@ -33,4 +33,4 @@ const tmdbEndpoints = {
     ),
 }
 
-export default { tmdbEndpoints }
+export default tmdbEndpoints 

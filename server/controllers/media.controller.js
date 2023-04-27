@@ -1,8 +1,8 @@
-import responseHandler from "../handlers/response.handler";
-import tmdbApi from "../tmdb/tmdb.api";
-import userModel from "../models/user.model";
-import watchlistModel from "../models/watchlist.model";
-import tokenMiddleware from "../middlewares/token.middleware";
+import responseHandler from "../handlers/response.handler.js";
+import tmdbApi from "../tmdb/tmdb.api.js";
+import userModel from "../models/user.model.js";
+import watchlistModel from "../models/watchlist.model.js";
+import tokenMiddleware from "../middlewares/token.middleware.js";
 
 const getList = async (req, res) => {
   try {
@@ -53,6 +53,7 @@ const search = async (req, res) => {
 const getDetail = async (req, res) => {
   try {
     const { mediaType, mediaId } = req.params;
+    //const { mediaType, mediaId } = req.body;
 
     const params = { mediaType, mediaId };
 
@@ -60,11 +61,11 @@ const getDetail = async (req, res) => {
 
     media.credits = await tmdbApi.mediaCredits(params);
 
-    const videos = await tmdbApi.mediaVideo(params);
+    const videos = await tmdbApi.mediaVideos(params);
 
     media.videos = videos;
 
-    const recommend = await tmdbApi.mediaRecomend(params);
+    const recommend = await tmdbApi.mediaRecommend(params);
 
     media.recommend = recommend.results;
 
