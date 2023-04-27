@@ -3,7 +3,6 @@ import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import userModel from "../models/user.model.js";
 import jsonwebtoken from "jsonwebtoken";
 import responseHandler from "../handlers/response.handler.js";
-//import bcrypt from 'bcrypt';
 
 const passportConfig = (passport) => {
   // Serialize user ID
@@ -16,6 +15,9 @@ const passportConfig = (passport) => {
     const user = await userModel.findById(id);
     done(null, user);
   });
+  // passport.deserializeUser((user, done) => {
+  //   done(null, user._id);
+  // });
 
   // Configure Google OAuth20 strategy
   passport.use(
@@ -23,18 +25,21 @@ const passportConfig = (passport) => {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://localhost:5001/api/auth/google/callback",
+        callbackURL: "http://localhost:5001/api/user/auth/google/callback",
+        session: false,
+        passReqToCallback: true,
       },
-      async (accessToken, refreshToken, profile, done) => {
+      async (req, accessToken, refreshToken, profile, cb) => {
         const email = profile.emails[0].value;
+        const image = profile.photos[0].value
         let user = await userModel.findOne({ email });
         if (!user) {
           user = await userModel.create({
             username: profile.displayName,
             displayName: profile.displayName,
             email,
+            image,
             password: null, // No password for Google users
-            salt: null,
           });
         }
         
@@ -44,13 +49,9 @@ const passportConfig = (passport) => {
           { expiresIn: "24h" }
         ); 
 
-        responseHandler.created(res, {
-            token,
-            ...user._doc,
-            id: user.id,
-          });
-
-        return done(null, user);
+        const userWithToken = {...user, token: token}
+        req.session.user = userWithToken;
+        return cb(null, userWithToken);
       }
     )
   );

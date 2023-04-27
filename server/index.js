@@ -8,6 +8,9 @@ import "dotenv/config"
 import passport from 'passport';
 import routes from "./routes/index.js"
 import passportConfig from './config/passport.js';
+import session from "express-session"
+import MongoStore from 'connect-mongo'
+
 
 //dotenv.config();
 const app = express()
@@ -15,9 +18,20 @@ const app = express()
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}))
 app.use(cookieParser())
-app.use(cors())
+
+app.use(session({
+    secret: process.env.TOKEN_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.ATLAS_URI, ttl: 7 * 24 * 60 * 60 }),
+  }));
+  app.use(passport.initialize());
+  app.use(passport.session());
 passportConfig(passport);
 
+
+
+app.use(cors())
 app.use("/api", routes)
 
 const port = process.env.PORT || 5001;
@@ -34,4 +48,3 @@ mongoose.connect(process.env.ATLAS_URI, { useNewUrlParser: true, useUnifiedTopol
     process.exit(1)
 })
 
-//mongoose.set("useCreateIndex", true)
