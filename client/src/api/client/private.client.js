@@ -2,7 +2,7 @@ import queryString from "query-string"
 
 const baseURL = "http://localhost:5001/api/"
 
-const user = localStorage.getItem("user")
+const user =  JSON.parse(localStorage.getItem("user"));
 
 const privateClient = {
     get: async(endpoint, body, query) => {

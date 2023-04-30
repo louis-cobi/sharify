@@ -1,0 +1,9 @@
+.none-visible{
+    display: none;
+}
+
+.visible{
+    display: flex;
+    position: absolute;
+    z-index: 10;
+}
