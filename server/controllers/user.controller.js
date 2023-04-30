@@ -117,7 +117,7 @@ const searchUser = async (req, res) => {
 
 const getInfo = async (req, res) => {
     try {
-        const user = await userModel.findById(req.user.id)
+        const user = await userModel.findById(req.params.userId)
 
         if (!user) return responseHandler.notfound(res)
 

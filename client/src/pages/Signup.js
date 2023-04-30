@@ -7,12 +7,12 @@ const Signup = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const { signup, error, isLoading } = useSignup()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         await signup(username, email, password)
-        navigate("/")
+        if(error === null ) navigate("/")
     }
 
     return (

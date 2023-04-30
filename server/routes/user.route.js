@@ -85,7 +85,7 @@ router.put(
     userController.updatePassword
 )
 
-router.get("/info", tokenMiddleware.auth, userController.getInfo)
+router.get("/info/:userId", tokenMiddleware.auth, userController.getInfo)
 
 router.get("/search", tokenMiddleware.auth, userController.searchUser)
 

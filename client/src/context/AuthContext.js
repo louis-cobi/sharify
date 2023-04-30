@@ -1,46 +1,49 @@
-import { createContext, useReducer, useEffect, useState } from "react";
+import { createContext, useReducer, useEffect, useState } from "react"
 
-export const AuthContext = createContext();
+export const AuthContext = createContext()
 
 export const authReducer = (state, action) => {
     switch (action.type) {
         case "LOGIN":
-            return { user: action.payload};
+            return { user: action.payload }
         case "LOGOUT":
-            return { user: null };
+            return { user: null }
         default:
-            return state;
+            return state
     }
-};
+}
 
 export const AuthContextProvider = ({ children }) => {
     const [state, dispatch] = useReducer(authReducer, {
         user: null,
-    });
+    })
 
-    const [isLoading, setIsLoading] = useState(true);
-
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        const sessionUser = async() => {
-            const response = await fetch("api/user/session")
-            const json = await response.json()
-            if(response.ok){
-                localStorage.setItem("user", JSON.stringify(json))
+        const sessionUser = async () => {
+            const user = JSON.parse(localStorage.getItem("user"))
+            if (user === null) {
+                const response = await fetch("api/user/session")
+                const json = await response.json()
+                if (response.ok) {
+                    localStorage.setItem("user", JSON.stringify(json))
+                }
             }
-            const user = JSON.parse(localStorage.getItem("user"));
-            if (user) {
-                dispatch({ type: "LOGIN", payload: user});
-            } 
-            setIsLoading(false);
+            const userAuthed =JSON.parse(localStorage.getItem("user"))
+            const userConnected = user || userAuthed
+            if (userConnected ) {
+                dispatch({ type: "LOGIN", payload: userConnected })
+            }
+            setIsLoading(false)
         }
         sessionUser()
-    }, []);
+    }, [])
 
-    console.log("AuthContext state : ", state);
+    console.log("AuthContext state : ", state)
     return (
         <AuthContext.Provider value={{ ...state, dispatch }}>
             {isLoading ? <div>Loading...</div> : children}
         </AuthContext.Provider>
-    );
-};
+    )
+}

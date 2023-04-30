@@ -23,7 +23,7 @@ app.use(session({
     secret: process.env.TOKEN_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.ATLAS_URI, ttl: 7 * 24 * 60 * 60 }),
+    store: MongoStore.create({ mongoUrl: process.env.ATLAS_URI, ttl: 7 * 24 * 60 * 60 }), //ttl: 7 days expiration
   }));
   app.use(passport.initialize());
   app.use(passport.session());

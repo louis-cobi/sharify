@@ -8,6 +8,8 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Search from "./pages/Search";
+import DetailMedia from "./components/DetailMedia";
 
 function App() {
   const { user } = useAuthContext()
@@ -20,6 +22,8 @@ function App() {
           <Route path="/" element={user ? <Home/> : <Navigate to={"/login"} />} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
+          <Route path="/search"  element={<Search/>}/>
+          <Route path="/detail/:mediaType/:mediaId"  element={<DetailMedia/>}/>
         </Routes>
       </BrowserRouter>
     </div>
