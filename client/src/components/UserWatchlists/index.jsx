@@ -8,7 +8,7 @@ const UserWatchlists = () => {
 
     useEffect(() => {
         const fetchWatchlists = async () => {
-            const { response, err } = await watchlistApi.get(user._id)
+            const { response, err } = await watchlistApi.getAll(user._id)
             if (response) {
                 setWatchlists(response)
             }
@@ -17,7 +17,7 @@ const UserWatchlists = () => {
             }
         }
         fetchWatchlists()
-    }, [])
+    }, [user._id])
     return (
         <div>
             {watchlists &&

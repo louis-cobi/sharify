@@ -3,26 +3,42 @@ import Picker from "@emoji-mart/react"
 import data from "@emoji-mart/data"
 import watchlistApi from "../../api/modules/watchlist.api"
 import "./index.css"
+import SearchUser from "../SearchUser"
+import { useNavigate } from "react-router-dom"
 
 const CreateWatchlist = () => {
+    const navigate = useNavigate()
+    const user = JSON.parse(localStorage.getItem("user"))
+
     const [title, setTitle] = useState("")
     const [isPickerEmoji, setEmojiPicker] = useState(false)
     const [emoji, setEmoji] = useState("")
-
-    const user =  JSON.parse(localStorage.getItem("user"));
-
-    let users = [{ id: user._id}]
+    const [users, setUsers] = useState([{ _id: user._id, username: user.username, image: user.image }])
 
     const handleTextChange = (event) => {
         setTitle(event.target.value)
     }
 
-    const handleSubmit = async() => {
-        const {response, err} = await watchlistApi.create(title, emoji, users)
-        if(response){
+    const handleAddUser = (e, user) => {
+        e.preventDefault()
+        const userList = [...users, user]
+        setUsers(userList)
+    }
+
+    const handleRemoveUser = (e, user) => {
+        e.preventDefault()
+        const filteredArray = users.filter(obj => obj !== user)
+        setUsers(filteredArray)
+    }
+
+
+    const handleSubmit = async () => {
+        const { response, err } = await watchlistApi.create(title, emoji, users)
+        if (response) {
+            navigate(`/search/${response.id}`)
             console.log(response)
         }
-        if(err){
+        if (err) {
             console.log(err)
         }
     }
@@ -57,6 +73,7 @@ const CreateWatchlist = () => {
                 value={title}
                 onChange={handleTextChange}
             />
+            <SearchUser users={users} onAdd={handleAddUser} onRemove={handleRemoveUser}/>
             <button onClick={() => handleSubmit()}>Create</button>
         </div>
     )

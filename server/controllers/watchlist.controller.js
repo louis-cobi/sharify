@@ -8,7 +8,7 @@ const createWatchList = async (req, res) => {
 
         const userList = await Promise.all(
             users.map((user) =>
-                userModel.findById(user.id).select("_id username image")
+                userModel.findById(user._id).select("_id username image")
             )
         )
 
@@ -33,6 +33,19 @@ const createWatchList = async (req, res) => {
 
 const getWatchList = async (req, res) => {
     try {
+        const { watchlistId } = req.params
+        const watchLists = await watchlistModel
+            .findById(watchlistId)
+            .populate("users", "_id username image")
+
+        responseHandler.ok(res, watchLists)
+    } catch {
+        responseHandler.error(res)
+    }
+}
+
+const getAllWatchList = async (req, res) => {
+    try {
         const { userId } = req.params
 
         const user = await userModel
@@ -51,7 +64,7 @@ const getWatchList = async (req, res) => {
     }
 }
 
-const addUsers = async (req, res) => {
+const addUser = async (req, res) => {
     try {
         const { users, watchList } = req.data
         //const { users, watchList } = req.body;
@@ -83,27 +96,23 @@ const addUsers = async (req, res) => {
     }
 }
 
-const addMedias = async (req, res) => {
+const addMedia = async (req, res) => {
     try {
-        //const { medias, watchList } = req.body
-        const { medias, watchList } = req.data
+        const { media, watchlistId } = req.body
 
-        const watchListDoc = await watchlistModel.findById(watchList.id)
+        const watchlist = await watchlistModel.findById(watchlistId)
 
-        if (!watchListDoc) return responseHandler.notfound(res)
+        watchlist.medias.push(media);
 
-        medias.forEach((media) => {
-            watchListDoc.medias.push(media)
-        })
+        await watchlist.save();
 
-        await watchListDoc.save()
-        responseHandler.ok(res, watchListDoc)
+        responseHandler.ok(res, watchlist._doc)
     } catch {
         responseHandler.error(res)
     }
 }
 
-const removeUsers = async (req, res) => {
+const removeUser = async (req, res) => {
     try {
         // cosnt { users, watchList} = req.body
         const watchListId = req.params.watchListId
@@ -127,7 +136,7 @@ const removeUsers = async (req, res) => {
     }
 }
 
-const removeMedias = async (req, res) => {
+const removeMedia = async (req, res) => {
     try {
         // cosnt { users, watchList} = req.body
         const watchListId = req.params.watchListId
@@ -188,10 +197,11 @@ const renameWatchList = async (req, res) => {
 export default {
     createWatchList,
     getWatchList,
-    addUsers,
-    addMedias,
+    getAllWatchList,
+    addUser,
+    addMedia,
     deleteWatchList,
-    removeUsers,
-    removeMedias,
+    removeUser,
+    removeMedia,
     renameWatchList,
 }

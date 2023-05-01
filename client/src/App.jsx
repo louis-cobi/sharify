@@ -27,6 +27,7 @@ function App() {
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<Signup/>} />
           <Route path="/createWatchlist"  element={<CreateWatchlist/>}/>
+          <Route path="/search/:watchlistId"  element={<Search/>}/>
           <Route path="/search"  element={<Search/>}/>
           <Route path="/detail/:mediaType/:mediaId"  element={<DetailMedia/>}/>
         </Routes>

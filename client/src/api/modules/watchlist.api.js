@@ -2,38 +2,56 @@ import privateClient from "../client/private.client"
 
 const watchlistEndpoints = {
     create: "watchlist/create",
-    get: (userId) => `watchlist/get/${userId}`,
+    get: (watchlistId) => `watchlist/get/${watchlistId}`,
+    getAll: (userId) => `watchlist/getAll/${userId}`,
     getInfo: (userId) => `user/info/${userId}`,
-    passwordUpdate: "user/update-password",
+    addMedia: "watchlist/addMedia",
 }
 
 const watchlistApi = {
     create: async (title, emoji, users) => {
         try {
-            const response = await privateClient.post(watchlistEndpoints.create, {
-                title,
-                emoji,
-                users
-            })
+            const response = await privateClient.post(
+                watchlistEndpoints.create,
+                {
+                    title,
+                    emoji,
+                    users,
+                }
+            )
 
             return { response }
         } catch (err) {
             return { err }
         }
     },
-    get: async (userId) => {
-        try {
-            const response = await privateClient.get(watchlistEndpoints.get(userId))
-
-            return { response }
-        } catch (err) {
-            return { err }
-        }
-    },
-    getInfo: async (userId) => {
+    get: async (watchlistId) => {
         try {
             const response = await privateClient.get(
-                watchlistEndpoints.getInfo(userId)
+                watchlistEndpoints.get(watchlistId)
+            )
+
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    getAll: async (userId) => {
+        try {
+            const response = await privateClient.get(
+                watchlistEndpoints.getAll(userId)
+            )
+
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    addMedia: async (watchlistId, media) => {
+        try {
+            const response = await privateClient.patch(
+                watchlistEndpoints.addMedia,
+                { watchlistId, media }
             )
 
             return { response }

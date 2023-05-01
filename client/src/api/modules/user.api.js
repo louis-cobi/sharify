@@ -5,6 +5,7 @@ const userEndpoints = {
     signin: "user/signin",
     signup: "user/signup",
     getInfo: (userId) => `user/info/${userId}`,
+    search: (searchText)  =>`user/search?searchText=${searchText}`,
     passwordUpdate: "user/update-password",
 }
 
@@ -40,6 +41,16 @@ const userApi = {
                 userEndpoints.getInfo(userId)
             )
 
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    search: async (searchText) => {
+        try {
+            const response = await privateClient.get(
+                userEndpoints.search(searchText)
+            )
             return { response }
         } catch (err) {
             return { err }

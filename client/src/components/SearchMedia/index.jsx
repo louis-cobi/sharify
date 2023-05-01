@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import mediaApi from "../../api/modules/media.api"
 import tmdbConfigs from "../../api/tmdb.config"
-import SearchMediaList from "../SearchMediaList"
+import MediaList from "../MediaList"
 
 const SearchMedia = () => {
     const [search, setSearch] = useState("")
@@ -40,7 +40,7 @@ const SearchMedia = () => {
         <div>
             <label htmlFor="text-input">Enter Text:</label>
             <input type="text" onChange={handleTextChange} />
-            {result  && <SearchMediaList mediaList={result} mediaType={mediaType}/>}
+            {result  && <MediaList mediaList={result} mediaType={mediaType}/>}
         </div>
     )
 }

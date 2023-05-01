@@ -11,8 +11,8 @@ const watchListSchema = new mongoose.Schema(
         mediaId: { type: Number },
         title: { type: String},
         posterPath: { type: String },
-        releaseDate: { type: String },
-        overview: { type: String },
+        type: { type: String },
+        backdrop_path: {type : String}
       },
     ],
     users: [{ type: Schema.Types.ObjectId, ref: "User" }],
