@@ -2,10 +2,11 @@ import privateClient from "../client/private.client"
 
 const watchlistEndpoints = {
     create: "watchlist/create",
+    update: (watchlistId) => `watchlist/update/${watchlistId}`,
     get: (watchlistId) => `watchlist/get/${watchlistId}`,
     getAll: (userId) => `watchlist/getAll/${userId}`,
-    getInfo: (userId) => `user/info/${userId}`,
     addMedia: "watchlist/addMedia",
+    removeMedia: "watchlist/removeMedia",
 }
 
 const watchlistApi = {
@@ -18,6 +19,18 @@ const watchlistApi = {
                     emoji,
                     users,
                 }
+            )
+
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    update: async (watchlistId, body) => {
+        try {
+            const response = await privateClient.patch(
+                watchlistEndpoints.update(watchlistId),
+                body
             )
 
             return { response }
@@ -59,11 +72,11 @@ const watchlistApi = {
             return { err }
         }
     },
-    passwordUpdate: async (password, newPassword, confirmNewPassword) => {
+    removeMedia: async (watchlistId, media) => {
         try {
-            const response = await privateClient.put(
-                watchlistEndpoints.passwordUpdate,
-                { password, newPassword, confirmNewPassword }
+            const response = await privateClient.patch(
+                watchlistEndpoints.removeMedia,
+                { watchlistId, media }
             )
 
             return { response }

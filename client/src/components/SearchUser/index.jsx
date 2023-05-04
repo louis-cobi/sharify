@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import userApi from "../../api/modules/user.api"
-import UsersList from "../UsersList"
+import UsersList from "./UsersList"
 
 const SearchUser = ({users , onAdd, onRemove}) => {
     const [searchtext, setSearchText] = useState("")
@@ -36,8 +36,7 @@ const SearchUser = ({users , onAdd, onRemove}) => {
 
     return (
         <div>
-            <label htmlFor="text-input">search user:</label>
-            <input type="text" onChange={handleTextChange} />
+            <input type="search" onChange={handleTextChange} placeholder="search user"/>
             {result  && <UsersList searchResult={result} onAdd={onAdd} onRemove={onRemove} users={users}/>}
         </div>
     )

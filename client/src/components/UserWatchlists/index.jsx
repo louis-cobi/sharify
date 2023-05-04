@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import watchlistApi from "../../api/modules/watchlist.api"
 
 const UserWatchlists = () => {
     const user = JSON.parse(localStorage.getItem("user"))
+    const navigate = useNavigate()
 
     const [watchlists, setWatchlists] = useState([])
 
@@ -18,12 +20,17 @@ const UserWatchlists = () => {
         }
         fetchWatchlists()
     }, [user._id])
+    
+    const handleNavigate = (e, watchlistId) => {
+        e.preventDefault()
+        navigate(`/watchlist/${watchlistId}`)
+    }
     return (
         <div>
             {watchlists &&
                 watchlists.map((watchlist) => {
                     return (
-                        <div key={watchlist.title}>
+                        <div key={watchlist._id} onClick={(e) => handleNavigate(e, watchlist._id)}>
                             <em-emoji
                                 shortcodes={watchlist.emoji}
                                 size="2em"

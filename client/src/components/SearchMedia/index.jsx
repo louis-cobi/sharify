@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import mediaApi from "../../api/modules/media.api"
 import tmdbConfigs from "../../api/tmdb.config"
-import MediaList from "../MediaList"
+import Dropdown from "../common/Dropdown"
+import MediaList from "./MediaList"
 
 const SearchMedia = () => {
     const [search, setSearch] = useState("")
@@ -9,7 +10,7 @@ const SearchMedia = () => {
     const [result, setResult] = useState([])
 
     useEffect(() => {
-        let timeoutId;
+        let timeoutId
 
         const searchMedia = async () => {
             const { response, err } = await mediaApi.search(mediaType, search)
@@ -36,11 +37,48 @@ const SearchMedia = () => {
         setSearch(event.target.value)
     }
 
+    const DropdownItem = () => {
+        return (
+            <ul>
+                <li
+                    onClick={() => {
+                        setMediaType(tmdbConfigs.mediaType.movie)
+                    }}
+                >
+                    {tmdbConfigs.mediaType.movie}
+                </li>
+                <li
+                    onClick={() => {
+                        setMediaType(tmdbConfigs.mediaType.tv)
+                    }}
+                >
+                    {tmdbConfigs.mediaType.tv}
+                </li>
+            </ul>
+        )
+    }
+
     return (
         <div>
             <label htmlFor="text-input">Enter Text:</label>
-            <input type="text" onChange={handleTextChange} />
-            {result  && <MediaList mediaList={result} mediaType={mediaType}/>}
+            <Dropdown icon={mediaType}>
+                <div
+                    onClick={() => {
+                        setMediaType(tmdbConfigs.mediaType.movie)
+                    }}
+                >
+                    {tmdbConfigs.mediaType.movie}
+                </div>
+                <div
+                    onClick={() => {
+                        setMediaType(tmdbConfigs.mediaType.tv)
+                    }}
+                >
+                    {tmdbConfigs.mediaType.tv}
+                </div>
+            </Dropdown>
+            <input type="search" onChange={handleTextChange} />
+            {result && <MediaList mediaList={result} mediaType={mediaType} />}
         </div>
     )
 }

@@ -2,10 +2,10 @@ import queryString from "query-string"
 
 const baseURL = "http://localhost:5001/api/"
 
-const user =  JSON.parse(localStorage.getItem("user"));
 
 const privateClient = {
     get: async(endpoint, body, query) => {
+        const user =  JSON.parse(localStorage.getItem("user"));
         const url =  query ? `${baseURL}${endpoint}?${queryString.stringify(query)}` : `${baseURL}${endpoint}`
         const options = {
             headers: {
@@ -29,6 +29,7 @@ const privateClient = {
         }
     },
     post: async(endpoint, body, query) => {
+        const user =  JSON.parse(localStorage.getItem("user"));
         const url =  query ? `${baseURL}${endpoint}?${queryString.stringify(query)}` : `${baseURL}${endpoint}`
         const options = {
             headers: {
@@ -52,6 +53,7 @@ const privateClient = {
         }
     },
     async put(endpoint, body, query) {
+        const user =  JSON.parse(localStorage.getItem("user"));
         const url =  query ? `${baseURL}${endpoint}?${queryString.stringify(query)}` : `${baseURL}${endpoint}`
         const options = {
             headers: {
@@ -75,6 +77,7 @@ const privateClient = {
         }
     },
     async patch(endpoint, body, query) {
+        const user =  JSON.parse(localStorage.getItem("user"));
         const url =  query ? `${baseURL}${endpoint}?${queryString.stringify(query)}` : `${baseURL}${endpoint}`
         const options = {
             headers: {
@@ -98,6 +101,7 @@ const privateClient = {
         }
     },
     async delete(endpoint, body, query) {
+        const user =  JSON.parse(localStorage.getItem("user"));
         const url =  query ? `${baseURL}${endpoint}?${queryString.stringify(query)}` : `${baseURL}${endpoint}`
         const options = {
             headers: {

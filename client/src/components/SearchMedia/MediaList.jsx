@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
-import tmdbConfigs from "../../api/tmdb.config"
 import watchlistApi from "../../api/modules/watchlist.api"
+import MediaListItem from "./MediaListItem"
 
 const MediaList = ({ mediaList, mediaType }) => {
     const { watchlistId } = useParams()
@@ -22,7 +22,7 @@ const MediaList = ({ mediaList, mediaType }) => {
             }
             fetchWatchlist()
         }
-    }, [])
+    }, [watchlistId])
 
     const navigate = useNavigate()
 
@@ -35,9 +35,31 @@ const MediaList = ({ mediaList, mediaType }) => {
         const backdrop_path = media.backdrop_path
         const mediaId = media.id
         const type = mediaType
-        const title = media.title
+        const title = media.title || media.name
 
         const { response, err } = await watchlistApi.addMedia(watchlistId, {
+            mediaId,
+            title,
+            type,
+            backdrop_path,
+        })
+        if (response) {
+            console.log(response)
+            setWatchlistMedia(response.medias)
+        }
+        if (err) {
+            console.log(err)
+        }
+    }
+
+    const handleRemove = async (e, media) => {
+        e.stopPropagation()
+        const backdrop_path = media.backdrop_path
+        const mediaId = media.id
+        const type = mediaType
+        const title = media.title || media.name
+
+        const { response, err } = await watchlistApi.removeMedia(watchlistId, {
             mediaId,
             title,
             type,
@@ -60,38 +82,15 @@ const MediaList = ({ mediaList, mediaType }) => {
                         (watchlistItem) => watchlistItem.mediaId === media.id
                     )
                     return (
-                        <div key={i++}>
-                            {media.backdrop_path && (
-                                <div onClick={() => handleNavigate(media.id)}>
-                                    <img
-                                        src={tmdbConfigs.backdropPath(
-                                            media.backdrop_path
-                                        )}
-                                        alt={media.title}
-                                        style={{ width: "100px" }}
-                                    />
-                                    <p>{media.title}</p>
-                                    {watchlistId &&
-                                        (isAdded ? (
-                                            <button
-                                                onClick={(e) =>
-                                                    handleAdd(e, media)
-                                                }
-                                            >
-                                                remove
-                                            </button>
-                                        ) : (
-                                            <button
-                                                onClick={(e) =>
-                                                    handleAdd(e, media)
-                                                }
-                                            >
-                                                add
-                                            </button>
-                                        ))}
-                                </div>
-                            )}
-                        </div>
+                        <MediaListItem
+                            key={i++}
+                            media={media}
+                            onNavigate={handleNavigate}
+                            onRemove={handleRemove}
+                            onAdd={handleAdd}
+                            isAdded={isAdded}
+                            watchlistId={watchlistId}
+                        />
                     )
                 })}
         </div>

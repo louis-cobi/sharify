@@ -6,21 +6,17 @@ const router = express.Router();
 
 router.post("/create", tokenMiddleware.auth, watchlistController.createWatchList)
 
+router.patch("/update/:watchlistId", tokenMiddleware.auth, watchlistController.updateWatchList)
+
+router.delete("/delete", tokenMiddleware.auth, watchlistController.deleteWatchList )
+
 router.get("/getAll/:userId", tokenMiddleware.auth, watchlistController.getAllWatchList)
 
 router.get("/get/:watchlistId", tokenMiddleware.auth, watchlistController.getWatchList)
 
-router.patch("/addUser", tokenMiddleware.auth, watchlistController.addUser)
-
 router.patch("/addMedia", tokenMiddleware.auth, watchlistController.addMedia)
 
-router.patch("/removeUser", tokenMiddleware.auth, watchlistController.removeUser)
-
 router.patch("/removeMedia" , tokenMiddleware.auth, watchlistController.removeMedia)
-
-router.delete("/delete", tokenMiddleware.auth, watchlistController.deleteWatchList )
-
-router.patch("/rename", tokenMiddleware.auth, watchlistController.renameWatchList)
 
 export default router;
 

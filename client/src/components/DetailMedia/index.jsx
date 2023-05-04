@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import mediaApi from "../../api/modules/media.api"
 import tmdbConfigs from "../../api/tmdb.config"
+import SwiperCast from "./SwiperCast"
+import SwiperVideo from "./SwiperVideo"
 
 const DetailMedia = () => {
     const [media, setMedia] = useState()
@@ -40,47 +42,10 @@ const DetailMedia = () => {
             </div>
             <p>{media.overview}</p>
             <div>
-                {media.videos.results && media.videos.results > 1 ? 
-                    media.videos.results.splice(0, 10).map((video) => {
-                        console.log(video)
-                        return (
-                            <iframe
-                                key={video.key}
-                                src={tmdbConfigs.youtubePath(video.key)}
-                                width="100%"
-                                title={video.name}
-                                style={{ border: 0 }}
-                            ></iframe>
-                        )
-                    }) :
-                    media.videos.results.map((video) => {
-                        console.log(video)
-                        return (
-                            <iframe
-                                key={video.key}
-                                src={tmdbConfigs.youtubePath(video.key)}
-                                width="100%"
-                                title={video.name}
-                                style={{ border: 0 }}
-                            ></iframe>
-                        )
-                    })
-                }
+                <SwiperVideo children={media.videos.results} />
             </div>
             <div>
-                {media.credits.cast && 
-                    media.credits.cast.splice(0, 10).map((cast, i) => {
-                        return (
-                            <div key={i}>
-                                <img
-                                    src={tmdbConfigs.posterPath(cast.profile_path)}
-                                    alt={cast.name}
-                                    style={{ width: "100px" }}
-                                />
-                                <p>{cast.name}</p>
-                            </div>
-                        )
-                    })}
+                <SwiperCast children={media.credits.cast} />
             </div>
             </>
             )}

@@ -31,6 +31,38 @@ const createWatchList = async (req, res) => {
     }
 }
 
+const updateWatchList = async (req, res) => {
+    try {
+        const { watchlistId } = req.params
+        const { title, users, emoji } = req.body
+
+        const userList = await Promise.all(
+            users.map((user) =>
+                userModel.findById(user._id).select("_id username image")
+            )
+        )
+
+        const watchList = await watchlistModel.findById(watchlistId)
+
+        watchList.title = title
+        watchList.users = userList
+        watchList.emoji = emoji
+
+        watchList.save()
+
+        const populatedWatchList = await watchlistModel
+            .findById(watchList.id)
+            .populate("users", "_id username image")
+
+        responseHandler.created(res, {
+            id: populatedWatchList.id,
+            ...populatedWatchList._doc,
+        })
+    } catch {
+        responseHandler.error(res)
+    }
+}
+
 const getWatchList = async (req, res) => {
     try {
         const { watchlistId } = req.params
@@ -64,47 +96,15 @@ const getAllWatchList = async (req, res) => {
     }
 }
 
-const addUser = async (req, res) => {
-    try {
-        const { users, watchList } = req.data
-        //const { users, watchList } = req.body;
-
-        const watchListDoc = await watchlistModel.findById(watchList.id)
-
-        if (!watchListDoc) return responseHandler.notfound(res)
-
-        let newUsers = []
-
-        await users.forEach(async (user) => {
-            const userId = await userModel
-                .findById(user.id)
-                .select("_id username displayName")
-            if (!userId) return responseHandler.notfound(res)
-            newUsers.push(userId)
-        })
-
-        const userlist = newUsers.forEach((user) => {
-            watchListDoc.users.push(user)
-        })
-
-        watchListDoc.users = userlist
-
-        await watchListDoc.save()
-        responseHandler.ok(res, watchListDoc)
-    } catch {
-        responseHandler.error(res)
-    }
-}
-
 const addMedia = async (req, res) => {
     try {
         const { media, watchlistId } = req.body
 
         const watchlist = await watchlistModel.findById(watchlistId)
 
-        watchlist.medias.push(media);
+        watchlist.medias.push(media)
 
-        await watchlist.save();
+        await watchlist.save()
 
         responseHandler.ok(res, watchlist._doc)
     } catch {
@@ -112,49 +112,19 @@ const addMedia = async (req, res) => {
     }
 }
 
-const removeUser = async (req, res) => {
-    try {
-        // cosnt { users, watchList} = req.body
-        const watchListId = req.params.watchListId
-        const { users } = req.body
-
-        const watchList = await watchlistModel.findById(watchListId)
-
-        if (!watchList) {
-            return responseHandler.error(res)
-        }
-
-        watchList.users = watchList.users.filter(
-            (user) => !users.includes(user)
-        )
-
-        await watchList.save()
-
-        responseHandler.ok(res, watchList)
-    } catch {
-        responseHandler.error(res)
-    }
-}
-
 const removeMedia = async (req, res) => {
     try {
-        // cosnt { users, watchList} = req.body
-        const watchListId = req.params.watchListId
-        const { medias } = req.body
+        const { media, watchlistId } = req.body
 
-        const watchList = await watchlistModel.findById(watchListId)
+        const watchlist = await watchlistModel.findById(watchlistId)
 
-        if (!watchList) {
-            return responseHandler.error(res)
-        }
+        watchlist.medias.pull(media)
 
-        watchList.users = watchList.users.filter(
-            (media) => !medias.includes(media)
-        )
+        await watchlist.save()
 
-        await watchList.save()
+        const updatedWatchlist = await watchlistModel.findById(watchlistId)
 
-        responseHandler.ok(res, watchList)
+        responseHandler.ok(res, updatedWatchlist)
     } catch {
         responseHandler.error(res)
     }
@@ -176,32 +146,12 @@ const deleteWatchList = async (req, res) => {
     }
 }
 
-const renameWatchList = async (req, res) => {
-    try {
-        const { watchListId } = req.params
-        const { name } = req.body
-
-        const watchList = await watchlistModel.findById(watchListId)
-        if (!watchList) {
-            return responseHandler.error(res)
-        }
-
-        watchList.title = name
-        await watchList.save()
-        responseHandler.ok(res, watchList)
-    } catch {
-        responseHandler.error(res)
-    }
-}
-
 export default {
     createWatchList,
+    deleteWatchList,
+    updateWatchList,
     getWatchList,
     getAllWatchList,
-    addUser,
     addMedia,
-    deleteWatchList,
-    removeUser,
     removeMedia,
-    renameWatchList,
 }
