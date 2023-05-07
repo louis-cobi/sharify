@@ -8,7 +8,7 @@ router.post("/create", tokenMiddleware.auth, watchlistController.createWatchList
 
 router.patch("/update/:watchlistId", tokenMiddleware.auth, watchlistController.updateWatchList)
 
-router.delete("/delete", tokenMiddleware.auth, watchlistController.deleteWatchList )
+router.delete("/delete/:watchlistId", tokenMiddleware.auth, watchlistController.deleteWatchList )
 
 router.get("/getAll/:userId", tokenMiddleware.auth, watchlistController.getAllWatchList)
 

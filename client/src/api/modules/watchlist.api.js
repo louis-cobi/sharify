@@ -7,6 +7,7 @@ const watchlistEndpoints = {
     getAll: (userId) => `watchlist/getAll/${userId}`,
     addMedia: "watchlist/addMedia",
     removeMedia: "watchlist/removeMedia",
+    delete: (watchlistId) => `watchlist/delete/${watchlistId}`
 }
 
 const watchlistApi = {
@@ -77,6 +78,17 @@ const watchlistApi = {
             const response = await privateClient.patch(
                 watchlistEndpoints.removeMedia,
                 { watchlistId, media }
+            )
+
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    delete: async (watchlistId) => {
+        try {
+            const response = await privateClient.delete(
+                watchlistEndpoints.delete(watchlistId)
             )
 
             return { response }

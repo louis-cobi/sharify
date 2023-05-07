@@ -132,15 +132,15 @@ const removeMedia = async (req, res) => {
 
 const deleteWatchList = async (req, res) => {
     try {
-        const { watchListId } = req.params
+        const { watchlistId } = req.params
 
-        const watchList = await watchlistModel.findById(watchListId)
-        if (!watchList) {
+        const watchlist = await watchlistModel.findById(watchlistId)
+        if (!watchlist) {
             return responseHandler.error(res)
         }
 
-        await watchList.delete()
-        responseHandler.ok(res)
+        await watchlist.delete()
+        responseHandler.ok(res, watchlist)
     } catch {
         responseHandler.error(res)
     }

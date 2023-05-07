@@ -1,0 +1,20 @@
+.floatting-button {
+    position: fixed;
+    border-radius: 50%;
+    right: 2em;
+    bottom: 6em;
+    background-color: var(--color-primary);
+    height: 6em;
+    width: 6em;
+    border-width: 0.15em;
+    border-color: var(--color-contrast);
+    border-style: solid;
+    transform: translate(-0.25rem,-0.25rem);
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+    transition: 0.2s;
+}
+
+.floatting-button:active {
+    transform: translate(0);
+    box-shadow: none;
+  }

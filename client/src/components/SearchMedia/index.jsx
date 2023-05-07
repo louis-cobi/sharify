@@ -37,27 +37,6 @@ const SearchMedia = () => {
         setSearch(event.target.value)
     }
 
-    const DropdownItem = () => {
-        return (
-            <ul>
-                <li
-                    onClick={() => {
-                        setMediaType(tmdbConfigs.mediaType.movie)
-                    }}
-                >
-                    {tmdbConfigs.mediaType.movie}
-                </li>
-                <li
-                    onClick={() => {
-                        setMediaType(tmdbConfigs.mediaType.tv)
-                    }}
-                >
-                    {tmdbConfigs.mediaType.tv}
-                </li>
-            </ul>
-        )
-    }
-
     return (
         <div>
             <label htmlFor="text-input">Enter Text:</label>

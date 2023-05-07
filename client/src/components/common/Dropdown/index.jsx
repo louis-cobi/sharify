@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
+import "./index.css"
 
 const Dropdown = ({icon, children }) => {
     const [isOpen, setIsOpen] = useState(false)
@@ -17,23 +18,25 @@ const Dropdown = ({icon, children }) => {
         }
     }
 
-    const toggleDropdown = () => {
+    const toggleDropdown = (e) => {
+        e.stopPropagation()
         setIsOpen(!isOpen)
     }
 
-    const handleItemClick = (props) => {
+    const handleItemClick = (e ,props) => {
+        e.stopPropagation()
         const { onClick } = props
         onClick()
         setIsOpen(false)
     }
 
     return (
-        <div ref={dropdownRef}>
-            <button onClick={toggleDropdown}>{icon}</button>
+        <div ref={dropdownRef} className="dropdown">
+            <button onClick={(e) => toggleDropdown(e)}>{icon}</button>
             {isOpen && (
-                <div>
+                <div className="dropdown-content">
                     {React.Children.map(children, (child) => (
-                        <div onClick={() => handleItemClick(child.props)}>
+                        <div onClick={(e) => handleItemClick(e, child.props)}>
                             {child}
                         </div>
                     ))}

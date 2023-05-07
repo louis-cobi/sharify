@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import ToggleTheme from "./ToggleTheme";
 
 const Header = () => {
   const { logout } = useLogout();
@@ -21,6 +22,7 @@ const Header = () => {
         {user && <span>{user.username}</span>}
         <button onClick={handleClick}>log out</button>
       </div>
+      <ToggleTheme />
     </header>
   );
 };

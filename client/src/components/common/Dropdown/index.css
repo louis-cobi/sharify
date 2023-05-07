@@ -1,0 +1,8 @@
+.dropdown{
+    display: flex;
+}
+
+.dropdown-content{
+    position: absolute;
+    margin-top: 1.4em;
+}
