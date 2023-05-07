@@ -19,10 +19,9 @@ function ToggleTheme() {
 
     return (
         <div className="toggle-mode">
-                <input type="checkbox" id="toggle-mode" checked={darkMode ? true : false} onChange={handleSwitch} />
-                <button onClick={handleSwitch}>
+                <div onClick={handleSwitch}>
                     <ThemeButton />
-                </button>
+                </div>
         </div>
     );
 }

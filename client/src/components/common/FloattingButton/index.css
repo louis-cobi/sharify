@@ -1,8 +1,8 @@
 .floatting-button {
-    position: fixed;
+    position: absolute;
     border-radius: 50%;
     right: 2em;
-    bottom: 6em;
+    bottom: 8em;
     background-color: var(--color-primary);
     height: 6em;
     width: 6em;

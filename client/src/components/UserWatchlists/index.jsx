@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import watchlistApi from "../../api/modules/watchlist.api"
 import UserWatchlistItem from "./UserWatchlistItem"
+import "./index.css"
 
 const UserWatchlists = () => {
     const user = JSON.parse(localStorage.getItem("user"))

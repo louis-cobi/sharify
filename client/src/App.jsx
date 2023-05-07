@@ -9,6 +9,7 @@ import "./App.css";
 
 //pages & components 
 import Header from "./components/Header";
+import BottomBar from "./components/BottomBar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
@@ -45,6 +46,7 @@ function App() {
             <Route path="/search"  element={<Search/>}/>
             <Route path="/detail/:mediaType/:mediaId"  element={<DetailMedia/>}/>
           </Routes>
+        <BottomBar />
       </BrowserRouter>
     </div>
   );

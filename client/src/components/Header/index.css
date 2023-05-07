@@ -1,0 +1,39 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100vw;
+    margin-top: 1em;
+}
+
+.header-info {
+    margin-left: 1em;
+    display: flex;
+    align-items: center;
+}
+
+.header-img{
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 0.5em;
+    border-width: 0.15em;
+    border-color: var(--color-contrast);
+    border-style: solid;
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+    background-position: center;
+    background-size: cover;
+}
+
+.header-name{
+    margin-left: 0.5em;
+    font-family: sudo;
+    font-weight: medium;
+}
+
+.header-center{
+    flex-grow: 1;
+}
+
+.header-theme{
+    margin-right: 1em;
+}

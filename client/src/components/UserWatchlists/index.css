@@ -1,0 +1,33 @@
+.user-watchlist-item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 80vw;
+    /*width: 18rem;*/
+    height: 4em;
+    background-color: var(--bg-color-secondary);
+    border-radius: 1em;
+    border-width: 0.15em;
+    border-color: var(--color-contrast);
+    border-style: solid;
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+    margin-bottom: 2em;
+    margin-bottom: 2em;
+    font-family: sudo;
+    font-weight: bold;
+    color: var(--color-text);
+}
+
+.user-watchlist-emoji{
+    margin-left: 1em;
+}
+
+.user-watchlist-title{
+    margin-left: 1em;
+    flex-grow: 1;
+    display: flex;
+}
+
+.user-watchlist-dropdown{
+    margin-right: 1em;
+}

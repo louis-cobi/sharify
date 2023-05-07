@@ -45,7 +45,7 @@ function ThemeButton({ onClick }) {
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          stroke={darkMode ? "white" : "black"}
+          stroke={darkMode ? "#fdfaf4" : "black"}
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -53,7 +53,7 @@ function ThemeButton({ onClick }) {
           onClick={() => toggle((prev) => !prev) && onClick}
         >
           <mask id="mask">
-            <rect x="0" y="0" width="100%" height="100%" fill="white" />
+            <rect x="0" y="0" width="100%" height="100%" fill="#fdfaf4" />
             <animated.circle
               style={maskedCircleProps}
               cx="12"
@@ -64,7 +64,7 @@ function ThemeButton({ onClick }) {
           </mask>
           <animated.circle
             style={centerCircleProps}
-            fill={darkMode ? "white" : "black"}
+            fill={darkMode ? "#fdfaf4" : "black"}
             cx="12"
             cy="12"
             r="9"

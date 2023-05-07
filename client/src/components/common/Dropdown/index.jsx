@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import "./index.css"
 
-const Dropdown = ({icon, children }) => {
+const Dropdown = ({ icon, children, left, center, right }) => {
     const [isOpen, setIsOpen] = useState(false)
     const dropdownRef = useRef(null)
 
@@ -13,7 +13,10 @@ const Dropdown = ({icon, children }) => {
     }, [])
 
     const handleClickOutside = (event) => {
-        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+        ) {
             setIsOpen(false)
         }
     }
@@ -23,18 +26,33 @@ const Dropdown = ({icon, children }) => {
         setIsOpen(!isOpen)
     }
 
-    const handleItemClick = (e ,props) => {
+    const handleItemClick = (e, props) => {
         e.stopPropagation()
         const { onClick } = props
         onClick()
         setIsOpen(false)
     }
 
+    const className = () => {
+        if (left) {
+            return "dropdown-content dropdown-left"
+        } else if (center) {
+            return "dropdown-content dropdown-center"
+        } else if (right) {
+            return "dropdown-content dropdown-right"
+        }
+    }
+
     return (
         <div ref={dropdownRef} className="dropdown">
-            <button onClick={(e) => toggleDropdown(e)}>{icon}</button>
+            <button
+                className="dropdown-button"
+                onClick={(e) => toggleDropdown(e)}
+            >
+                {icon}
+            </button>
             {isOpen && (
-                <div className="dropdown-content">
+                <div className={className()}>
                     {React.Children.map(children, (child) => (
                         <div onClick={(e) => handleItemClick(e, child.props)}>
                             {child}

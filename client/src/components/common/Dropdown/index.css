@@ -1,8 +1,33 @@
-.dropdown{
+.dropdown {
     display: flex;
 }
 
-.dropdown-content{
+.dropdown-button {
+    background-color: transparent;
+    color: var(--color-text);
+    border: none;
+}
+
+.dropdown-button-active {
+    border-radius: 0.5em;
+    border-width: 0.15em;
+    border-color: var(--color-contrast);
+    border-style: solid;
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+}
+
+.dropdown-content {
     position: absolute;
-    margin-top: 1.4em;
+    margin-top: 2em;
+    background-color: var(--bg-color-secondary);
+    border-radius: 1em;
+    border-width: 0.15em;
+    border-color: var(--color-contrast);
+    border-style: solid;
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+    padding: 1em;
+}
+
+.dropdown-left{
+    margin-left: -3em;
 }
