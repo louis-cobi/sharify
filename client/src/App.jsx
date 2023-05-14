@@ -45,6 +45,8 @@ function App() {
             <Route path="/search/:watchlistId"  element={<Search/>}/>
             <Route path="/search"  element={<Search/>}/>
             <Route path="/detail/:mediaType/:mediaId"  element={<DetailMedia/>}/>
+            <Route path="/reset-password"  element={<DetailMedia/>}/>
+            <Route path="/reset-password/:id/:token"  element={<DetailMedia/>}/>
           </Routes>
         <BottomBar />
       </BrowserRouter>

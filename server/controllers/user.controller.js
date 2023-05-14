@@ -2,6 +2,7 @@ import userModel from "../models/user.model.js"
 import jsonwebtoken from "jsonwebtoken"
 import responseHandler from "../handlers/response.handler.js"
 import bcrypt from "bcrypt"
+import nodemailer from "nodemailer"
 
 const signup = async (req, res) => {
     try {
@@ -92,7 +93,7 @@ const updatePassword = async (req, res) => {
 
         await user.save()
 
-        responseHandler.ok(res)
+        responseHandler.ok(res, user)
     } catch {
         responseHandler.error(res)
     }
@@ -128,14 +129,108 @@ const getInfo = async (req, res) => {
 }
 
 const getSession = async (req, res) => {
-  try{
-      const {_doc, token} = req.session.user
-      const userResponse = {..._doc, token: token}
-      responseHandler.ok(res, userResponse)
-  } catch {
-    responseHandler.error(res)
-  }
+    try {
+        const { _doc, token } = req.session.user
+        const userResponse = { ..._doc, token: token }
+        responseHandler.ok(res, userResponse)
+    } catch {
+        responseHandler.error(res)
+    }
 }
 
+const sendPasswordReset = async (req, res) => {
+    const { email } = req.body
 
-export default { signup, signin, searchUser, updatePassword, getInfo , getSession}
+    try {
+        const emailExist = await userModel.findOne({ email: email })
+        if (!emailExist) {
+            return responseHandler.badrequest(res, "User not found")
+        }
+
+        const token = jsonwebtoken.sign({ data: emailExist._id }, process.env.TOKEN_SECRET, {
+            expiresIn: "10m",
+        })
+
+        const link = `http://localhost:3000/reset-password/${emailExist._id}/${token}`
+
+        let transporter = nodemailer.createTransport({
+            service: "gmail",
+            host: "smtp.gmail.com",
+            port: 587,
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.EMAIL_PASSWORD,
+            },
+        })
+
+        let mailOptions = {
+            from: process.env.EMAIL,
+            to: email,
+            subject: "Reset Password",
+            text: `Please click on the following link to reset your password ${link}`,
+        }
+
+        transporter.sendMail(mailOptions, (err) => {
+            if (err) {
+                console.log("Error occurs", err)
+            } else {
+                console.log("Email sent")
+            }
+        })
+    } catch {
+        responseHandler.error(res)
+        return
+    }
+}
+
+const passwordReset = async (req, res) => {
+    const { id, token } = req.params
+    const { newPassword, confirmPassword } = req.body
+
+    try {
+        if (newPassword || confirmPassword) {
+            if (newPassword == confirmPassword) {
+                const validToken = jsonwebtoken.verify(token, process.env.TOKEN_SECRET)
+                if (validToken) {
+                    const userInfo = await userModel.findOne({ _id: id })
+                    if (userInfo) {
+                        const salt = await bcrypt.genSalt(10)
+                        const hashedPassword = await bcrypt.hash(
+                            newPassword,
+                            salt
+                        )
+                        const reset = await userModel.findOneAndUpdate(
+                            { _id: id },
+                            { $set: { password: hashedPassword } }
+                        )
+                        if (reset) {
+                            return responseHandler.ok(res, reset)
+                        }
+                    } else {
+                        return responseHandler.badrequest(res, "User not found")
+                    }
+                } else {
+                    return responseHandler.badrequest(res, "Link expired")
+                }
+            } else {
+                return  responseHandler.badrequest(res, "Password didn't match")
+            }
+        } else {
+            return responseHandler.badrequest(res, "Fields must be not empty")
+        }
+    } catch {
+        responseHandler.error(res)
+        return
+    }
+}
+
+export default {
+    signup,
+    signin,
+    searchUser,
+    updatePassword,
+    getInfo,
+    getSession,
+    sendPasswordReset,
+    passwordReset
+}

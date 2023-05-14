@@ -71,6 +71,8 @@ const getDetail = async (req, res) => {
 
     media.images = await tmdbApi.mediaImages(params);
 
+    media.providers = await tmdbApi.mediaProviders(params)
+
     const tokenDecoded = tokenMiddleware.tokenDecode(req);
 
     if (tokenDecoded) {

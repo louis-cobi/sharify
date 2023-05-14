@@ -46,17 +46,14 @@ router.get(
 
 router.get(
     "/auth/google/callback",
-    passport.authenticate(
-        "google",
-        {
-            successRedirect: "http://localhost:3000/",
-            failureRedirect: "http://localhost:3000/login",
-            session: false,
-        }
-    )
+    passport.authenticate("google", {
+        successRedirect: "http://localhost:3000/",
+        failureRedirect: "http://localhost:3000/login",
+        session: false,
+    })
 )
 
-router.get('/session', userController.getSession);
+router.get("/session", userController.getSession)
 
 router.put(
     "/update-password",
@@ -83,6 +80,28 @@ router.put(
         }),
     requestHandler.validate,
     userController.updatePassword
+)
+
+router.post("/send-reset", userController.sendPasswordReset)
+
+router.patch(
+    "/reset-password/:id/:token",
+    body("newPassword")
+        .exists()
+        .withMessage("newPassword is required")
+        .isLength({ min: 8 })
+        .withMessage("newPassword minimum 8 characters"),
+    body("confirmPassword")
+        .exists()
+        .withMessage("confirmNewPassword is required")
+        .isLength({ min: 8 })
+        .withMessage("confirmNewPassword minimum 8 characters")
+        .custom((value, { req }) => {
+            if (value !== req.body.newPassword)
+                throw new Error("confirmNewPassword not match")
+            return true
+        }),
+    userController.passwordReset
 )
 
 router.get("/info/:userId", tokenMiddleware.auth, userController.getInfo)

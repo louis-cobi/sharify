@@ -4,6 +4,8 @@ import mediaApi from "../../api/modules/media.api"
 import tmdbConfigs from "../../api/tmdb.config"
 import SwiperCast from "./SwiperCast"
 import SwiperVideo from "./SwiperVideo"
+import './index.css'
+import MediaPlatform from "./MediaPlatform"
 
 const DetailMedia = () => {
     const [media, setMedia] = useState()
@@ -25,22 +27,32 @@ const DetailMedia = () => {
     }, [mediaType, mediaId])
 
     return (
-        <div>
+        <div className="media__wrapper">
             {media && (
                 <>
                 <img
                     src={tmdbConfigs.posterPath(media.poster_path)}
                     alt={media.title}
-                    style={{ width: "100px" }}
+                    className="media__image"
                 />
-            <h1>{media.title || media.name}</h1>
-            <div>
+            <h1 className="media__title">{media.title || media.name}</h1>
+            <div className="media__types">
+                <div className="media__types__title">Genres :</div>
                 {" "}
-                {media.genres.map((genre, i) => (
-                    <p key={i}>{genre.name}</p>
-                ))}
+                <div className="media__types__items">
+                    {media.genres.map((genre, i) => (
+                        <p key={i} className="media__types__item">{genre.name}</p>
+                    ))}
+                </div>
             </div>
-            <p>{media.overview}</p>
+            <button className="media__btn">Add</button>
+            <div className="media__overview">
+                <div className="media__overview__title">Synopsys :</div>
+                <p className="media__overview__description">{media.overview}</p>
+            </div>
+            <div>
+                <MediaPlatform platforms={media.providers.results} title={media.title || media.name}/>
+            </div>
             <div>
                 <SwiperVideo children={media.videos.results} />
             </div>

@@ -22,6 +22,9 @@ const tmdbEndpoints = {
     mediaImages: ({ mediaType, mediaId }) => tmdbConfig.getUrl(
         `${mediaType}/${mediaId}/images`
     ),
+    mediaProviders: ({ mediaType, mediaId }) => tmdbConfig.getUrl(
+        `${mediaType}/${mediaId}/watch/providers`
+    ),
     mediaSearch: ({ mediaType, query, page }) => tmdbConfig.getUrl(
         `search/${mediaType}`, { query, page }
     ),

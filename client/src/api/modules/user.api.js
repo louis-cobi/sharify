@@ -5,8 +5,10 @@ const userEndpoints = {
     signin: "user/signin",
     signup: "user/signup",
     getInfo: (userId) => `user/info/${userId}`,
-    search: (searchText)  =>`user/search?searchText=${searchText}`,
+    search: (searchText) => `user/search?searchText=${searchText}`,
     passwordUpdate: "user/update-password",
+    sendReset: "user/send-rest",
+    passwordReset: (id, token) => `/reset-password/${id}/${token}`
 }
 
 const userApi = {
@@ -62,7 +64,27 @@ const userApi = {
                 userEndpoints.passwordUpdate,
                 { password, newPassword, confirmNewPassword }
             )
-
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    sendReset: async (email) => {
+        try {
+            const response = await publicClient.post(userEndpoints.sendReset, {
+                email,
+            })
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    passwordReset: async (id, token, newPassword, confirmPassword) => {
+        try {
+            const response = await publicClient.put(
+                userEndpoints.passwordReset(id, token),
+                { newPassword, confirmPassword }
+            )
             return { response }
         } catch (err) {
             return { err }

@@ -1,6 +1,6 @@
 import { useLogout } from "../../hooks/useLogout"
 import { useAuthContext } from "../../hooks/useAuthContext"
-import ToggleTheme from "../ToggleTheme"
+import ToggleTheme from "./ToggleTheme"
 import "./index.css"
 
 const Header = () => {
@@ -25,11 +25,12 @@ const Header = () => {
                                 }}
                             ></div>
                         ) : (
-                            <img
-                                src={`https://avatars.dicebear.com/api/initials/${user.username}.svg`}
-                                alt={user.username}
+                            <div
                                 className="header-img"
-                            />
+                                style={{
+                                    backgroundImage: `url(https://avatars.dicebear.com/api/initials/${user.username}.svg)`,
+                                }}
+                            ></div>
                         )}
                         <span className="header-name">{user.username}</span>
                     </div>

@@ -1,0 +1,31 @@
+.watchlist-settings-container{
+    width: 80vw;
+    height: 70vh;
+    margin-top: 10vh;
+    border-radius: 1em;
+    background-color: var(--bg-color-secondary);
+    border-color: var(--color-contrast);
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+}
+
+.watchlist-settings-header{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    background-color: var(--color-primary);
+    border-top-right-radius: 1em;
+    border-top-left-radius: 1em;
+    border: var(--color-contrast) 0.15em solid;
+}
+
+.watchlist-settings-input{
+    height: 2em;
+    width: 64%;
+    color: var(--color-text);
+    background-color: var(--bg-color-secondary);
+    border: var(--color-contrast) solid;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+}

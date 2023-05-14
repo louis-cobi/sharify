@@ -1,5 +1,5 @@
 .floatting-button {
-    position: absolute;
+    position: fixed;
     border-radius: 50%;
     right: 2em;
     bottom: 8em;

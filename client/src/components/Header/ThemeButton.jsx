@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { useSpring, animated } from "react-spring"
-import { useThemeContext } from "../hooks/useThemeContext"
+import { useThemeContext } from "../../hooks/useThemeContext"
 
 function ThemeButton({ onClick }) {
     const { darkMode } = useThemeContext()

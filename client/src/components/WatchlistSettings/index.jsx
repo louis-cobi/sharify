@@ -1,5 +1,6 @@
 import EmojiPicker from "../common/EmojiPicker"
 import SearchUser from "../SearchUser"
+import "./index.css"
 
 const WatchlistSettings = ({
     setEmoji,
@@ -12,8 +13,8 @@ const WatchlistSettings = ({
     onClick,
     text}) => {
     return(
-        <div>
-            <div>
+        <div className="watchlist-settings-container">
+            <div className="watchlist-settings-header">
                 <EmojiPicker setEmoji={setEmoji} emoji={emoji} />
                 <input
                     type="text"
@@ -22,7 +23,8 @@ const WatchlistSettings = ({
                     placeholder="Title"
                     value={title}
                     onChange={onChange}
-                />
+                    className="watchlist-settings-input"
+                ></input>
             </div>
             <SearchUser
                 users={users}
