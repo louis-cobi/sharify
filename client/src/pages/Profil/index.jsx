@@ -1,7 +1,7 @@
 import Button from "../../components/common/Button"
 import BrowserCard from "../../components/common/BrowserCard"
 import { useState } from "react"
-import Title from "../../components/common/TItle"
+import Title from "../../components/common/Title"
 import { useLogout } from "../../hooks/useLogout"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
@@ -71,6 +71,7 @@ const Profil = ({onUserUpdate}) => {
 
     const handleLogout = () => {
         logout()
+        onUserUpdate()
     }
 
     const renderProfil = () => {

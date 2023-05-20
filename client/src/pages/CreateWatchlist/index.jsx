@@ -34,11 +34,9 @@ const CreateWatchlist = () => {
         const { response, err } = await watchlistApi.create(title, emoji, users)
         if (response) {
             navigate(`/search/${response.id}`)
-            console.log(response)
             toast.success("Watchlist successfully created")
         }
         if (err) {
-            console.log(err)
             toast.error(err.message)
         }
     }

@@ -24,6 +24,11 @@
     background-size: cover;
 }
 
+.logo-img{
+    width: 2.5em;
+    height: 2.5em;
+}
+
 .header-name{
     margin-left: 0.5em;
     font-family: sudo;

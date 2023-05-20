@@ -27,13 +27,14 @@
     width: 0.7rem;
     height: 0.7rem;
     border-radius: 50%;
-    border: 2px solid var(--color-contrast);
+    border: 2px solid #000000;
     margin: 0.5rem 0 0.5rem 0.2rem;
     background-color: var(--color-primary)
 }
 
 .browser-card-header-icon:first-child {
-    background-color: var(--color-tertiary)
+    background-color: var(--color-tertiary);
+    margin-left: 1rem;
 }
 
 .browser-card-header-icon:last-child {

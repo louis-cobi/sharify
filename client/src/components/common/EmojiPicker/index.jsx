@@ -35,7 +35,7 @@ const EmojiPicker = ({ setEmoji, emoji }) => {
                 className="emoji-picker-button"
             >
                 {emoji !== "" ? (
-                    <em-emoji shortcodes={emoji} size="1.5em"></em-emoji>
+                    <em-emoji shortcodes={emoji} size="1.3em"></em-emoji>
                 ) : (
                     <FontAwesomeIcon icon={faFaceSmile} className="emoji-faFaceSmile" />
                     // <FontAwesomeIcon icon={faFaceSmile} style={{color: "#000000",}} />

@@ -40,7 +40,6 @@ export const AuthContextProvider = ({ children }) => {
         sessionUser()
     }, [])
 
-    console.log("AuthContext state : ", state)
     return (
         <AuthContext.Provider value={{ ...state, dispatch }}>
             {isLoading ? <div>Loading...</div> : children}

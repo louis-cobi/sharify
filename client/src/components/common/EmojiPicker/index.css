@@ -15,6 +15,7 @@
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
     border-color: var(--color-contrast);
+    border-width: 0.15em;
 }
 
 .emoji-faFaceSmile {

@@ -18,7 +18,7 @@ const UserWatchlists = () => {
                 setWatchlists(response)
             }
             if (err) {
-                console.log(err)
+                toast.error(err.message)
             }
         }
         fetchWatchlists()
@@ -40,7 +40,7 @@ const UserWatchlists = () => {
             setWatchlists(response)
         }
         if (err) {
-            console.log(err)
+            toast.error(err.message)
         }
     }
 

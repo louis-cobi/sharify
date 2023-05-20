@@ -54,7 +54,7 @@ const Dropdown = ({ icon, children, left, center, right }) => {
             {isOpen && (
                 <div className={className()}>
                     {React.Children.map(children, (child) => (
-                        <div onClick={(e) => handleItemClick(e, child.props)}>
+                        <div onClick={(e) => handleItemClick(e, child.props)} className="dropdown-content-child">
                             {child}
                         </div>
                     ))}

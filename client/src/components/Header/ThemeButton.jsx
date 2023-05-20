@@ -4,7 +4,7 @@ import { useThemeContext } from "../../hooks/useThemeContext"
 
 function ThemeButton({ onClick }) {
     const { darkMode } = useThemeContext()
-    const [isDarkMode, toggle] = useState(false)
+    const [isDarkMode, toggle] = useState(localStorage.getItem("darkMode") === "true" ? true : false)
     const properties = {
         sun: {
             r: 9,

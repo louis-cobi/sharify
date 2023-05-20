@@ -1,7 +1,7 @@
 import { useState } from "react"
 import BroswerCard from "../../components/common/BrowserCard"
 import Button from "../../components/common/Button"
-import Title from "../../components/common/TItle"
+import Title from "../../components/common/Title"
 import userApi from "../../api/modules/user.api"
 import { toast } from "react-toastify"
 import './index.css'
@@ -23,7 +23,7 @@ const SendResetPassword = () => {
         return (
             <form onSubmit={handleSubmit} className="reset-password-container">
                 <label className="reset-password-label">Enter your email to reset your password</label>
-                <input value={email} onChange={(e) => setEmail(e.value)} className="reset-password-input"/>
+                <input value={email} onChange={(e) => setEmail(e.target.value)} className="reset-password-input"/>
                 <Button text="Submit" />
             </form>
         )

@@ -9,8 +9,8 @@ const userEndpoints = {
     passwordUpdate: "user/update-password",
     usernameUpdate: "user/update-username",
     emailUpdate: "user/update-email",
-    sendReset: "user/send-rest",
-    passwordReset: (id, token) => `/reset-password/${id}/${token}`
+    sendReset: "user/send-reset",
+    passwordReset: (id, token) => `user/reset-password/${id}/${token}`
 }
 
 const userApi = {

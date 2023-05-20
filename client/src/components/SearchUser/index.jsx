@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import userApi from "../../api/modules/user.api"
 import UsersList from "./UsersList"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
 
 const SearchUser = ({users , onAdd, onRemove}) => {
     const [searchtext, setSearchText] = useState("")
@@ -35,8 +37,13 @@ const SearchUser = ({users , onAdd, onRemove}) => {
     }
 
     return (
-        <div>
-            <input type="search" onChange={handleTextChange} placeholder="search user"/>
+        <div className="watchlist-settings-list">
+            <div className="search-users-list">
+                <input type="search" onChange={handleTextChange} placeholder="search user" className="search-users-list-input"/>
+                <div className="search-users-list-icon">
+                    <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                </div>
+            </div>
             {result  && <UsersList searchResult={result} onAdd={onAdd} onRemove={onRemove} users={users}/>}
         </div>
     )

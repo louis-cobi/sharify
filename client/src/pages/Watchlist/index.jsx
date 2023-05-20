@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import watchlistApi from "../../api/modules/watchlist.api"
-import Title from "../../components/common/TItle"
+import Title from "../../components/common/Title"
 import WatchlistItem from "../../components/WatchlistItem"
 import './index.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -16,11 +16,10 @@ const Watchlist = () => {
         const fetchWatchlist = async () => {
             const { response, err } = await watchlistApi.get(watchlistId)
             if (response) {
-                console.log(response)
                 setWatchlist(response)
             }
             if (err) {
-                console.log(err)
+                toast.error(err.message)
             }
         }
         fetchWatchlist()
@@ -28,7 +27,7 @@ const Watchlist = () => {
 
     const handleNavigate = (e, media) => {
         e.preventDefault()
-        navigate(`/detail/${media.type}/${media.mediaId}`)
+        navigate(`/detail/${media.type}/${media.mediaId}/${watchlistId}`)
     }
 
     const handleNavigateModify = (e) => {

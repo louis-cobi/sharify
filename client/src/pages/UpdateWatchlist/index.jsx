@@ -50,11 +50,9 @@ const CreateWatchlist = () => {
         const { response, err } = await watchlistApi.update(watchlistId, {title, emoji, users})
         if (response) {
             navigate(`/watchlist/${response.id}`)
-            console.log(response)
             toast.success(` ${response.title} modified`)
         }
         if (err) {
-            console.log(err)
             toast.error(err.message)
         }
     }

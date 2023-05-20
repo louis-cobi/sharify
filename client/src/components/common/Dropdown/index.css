@@ -6,11 +6,12 @@
     background-color: transparent;
     color: var(--color-text);
     border: none;
+    width: 100%;
 }
 
 .dropdown-button-active {
-    border-radius: 0.5em;
-    border-width: 0.15em;
+    border-radius: 0.5rem;
+    border-width: 0.15rem;
     border-color: var(--color-contrast);
     border-style: solid;
     box-shadow: 0.25rem 0.25rem var(--color-contrast);
@@ -18,16 +19,24 @@
 
 .dropdown-content {
     position: absolute;
-    margin-top: 2em;
+    margin-top: 2rem;
     background-color: var(--bg-color-secondary);
-    border-radius: 1em;
+    border-radius: 1rem;
     border-width: 0.15em;
     border-color: var(--color-contrast);
     border-style: solid;
     box-shadow: 0.25rem 0.25rem var(--color-contrast);
-    padding: 1em;
+    padding: 0.4rem;
+}
+
+.dropdown-content-child {
+    padding: 0.4rem;
 }
 
 .dropdown-left{
-    margin-left: -3em;
+    margin-left: -3rem;
+}
+
+.dropdown-center{
+    margin-top: 4rem;
 }

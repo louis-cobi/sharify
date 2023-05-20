@@ -9,7 +9,7 @@ const UsersList = ({ users, onAdd, onRemove, searchResult }) => {
         )
 
     return (
-        <div>
+        <div className="users-list">
             <div>
                 {users &&
                     users.map((user, i) => {

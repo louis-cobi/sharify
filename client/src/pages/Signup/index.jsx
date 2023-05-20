@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useSignup } from "../../hooks/useSignup"
 import { useNavigate } from "react-router-dom"
 import BroswerCard from "../../components/common/BrowserCard"
-import Title from "../../components/common/TItle"
+import Title from "../../components/common/Title"
 import Button from "../../components/common/Button"
 import "./index.css"
 

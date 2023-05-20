@@ -13,12 +13,13 @@ const MediaListItem = ({
 }) => {
     return (
         <div className="media-container">
-            {media.backdrop_path && (
+            {media.poster_path && (
                 <div onClick={() => onNavigate(media.id)} className="media-content">
                     <img
-                        src={tmdbConfigs.backdropPath(media.backdrop_path)}
+                        //src={tmdbConfigs.backdropPath(media.backdrop_path)}
+                        src={tmdbConfigs.backdropPath(media.poster_path)}
                         alt={media.title}
-                        style={{ width: "100px" }}
+                        // style={{ width: "100px" }}
                         className="media-content-image"
                     />
                     <p className="media-content-title">{media.title || media.name}</p>

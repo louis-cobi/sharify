@@ -10,7 +10,7 @@ const WatchlistItem = ({media, onNavigate, onRemove}) => {
         <div onClick={(e) => onNavigate(e, media)} key={media.mediaId} className="watchlist-media-list-container">
             <img
                 alt={media.title}
-                src={tmdbConfigs.backdropPath(media.backdrop_path)}
+                src={tmdbConfigs.backdropPath(media.backdrop_path || media.poster_path)}
                 style={{ width: "200px" }}
                 className="watchlist-media-list-image"
             />
