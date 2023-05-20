@@ -2,7 +2,11 @@ import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import watchlistApi from "../../api/modules/watchlist.api"
+import Title from "../../components/common/TItle"
 import WatchlistItem from "../../components/WatchlistItem"
+import './index.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSliders } from "@fortawesome/free-solid-svg-icons"
 
 const Watchlist = () => {
     const navigate = useNavigate()
@@ -54,21 +58,29 @@ const Watchlist = () => {
 
     return (
         <div>
-            {watchlist.title && watchlist.emoji && (
-                <div>
-                    <em-emoji
-                        shortcodes={watchlist.emoji}
-                        size="2em"
-                    ></em-emoji>
-                    {watchlist.title}
-                    <button onClick={(e) => handleNavigateModify(e)}>modify</button>
+            <Title text="My watch list"/>
+            <div className="watch-list-container">
+                <div className="watch-list-header">
+                    {watchlist.title && watchlist.emoji && (
+                        <div className="watch-list-header-info">
+                            <em-emoji
+                                shortcodes={watchlist.emoji}
+                                size="2em"
+                            ></em-emoji>
+                            <div className="watch-list-header-title">{watchlist.title}</div>
+                            <button onClick={(e) => handleNavigateModify(e)} className="watch-list-header-button">
+                                <FontAwesomeIcon icon={faSliders} size="2x"/>
+                            </button>
+                        </div>
+                    )}
                 </div>
-
-            )}
-            {watchlist.medias &&
-                watchlist.medias.map((media, i) => {
-                    return <WatchlistItem  key={i++} media={media} onNavigate={handleNavigate} onRemove={handleRemove}/>
-                })}
+                <div className="watch-list-films">
+                    {watchlist.medias &&
+                        watchlist.medias.map((media, i) => {
+                            return <WatchlistItem  key={i++} media={media} onNavigate={handleNavigate} onRemove={handleRemove}/>
+                        })}
+                </div>
+            </div>
         </div>
     )
 }

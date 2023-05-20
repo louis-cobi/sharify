@@ -1,0 +1,24 @@
+.profil-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+}
+
+.profil-img{
+    width: 8em;
+    height: 8em;
+    border-radius: 0.5em;
+    border-width: 0.15em;
+    border-color: var(--color-contrast);
+    border-style: solid;
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+    background-position: center;
+    background-size: cover;
+    margin-bottom: 1em;
+}
+
+.profil-username, .profil-email{
+    margin-bottom: 1em;
+}
+

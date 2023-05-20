@@ -7,6 +7,8 @@ const userEndpoints = {
     getInfo: (userId) => `user/info/${userId}`,
     search: (searchText) => `user/search?searchText=${searchText}`,
     passwordUpdate: "user/update-password",
+    usernameUpdate: "user/update-username",
+    emailUpdate: "user/update-email",
     sendReset: "user/send-rest",
     passwordReset: (id, token) => `/reset-password/${id}/${token}`
 }
@@ -58,11 +60,33 @@ const userApi = {
             return { err }
         }
     },
-    passwordUpdate: async (password, newPassword, confirmNewPassword) => {
+    passwordUpdate: async (id, password) => {
         try {
-            const response = await privateClient.put(
+            const response = await privateClient.patch(
                 userEndpoints.passwordUpdate,
-                { password, newPassword, confirmNewPassword }
+                { id, password }
+            )
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    usernameUpdate: async (id, username) => {
+        try {
+            const response = await privateClient.patch(
+                userEndpoints.usernameUpdate,
+                { id, username }
+            )
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    emailUpdate: async (id, email) => {
+        try {
+            const response = await privateClient.patch(
+                userEndpoints.emailUpdate,
+                { id, email }
             )
             return { response }
         } catch (err) {
@@ -81,7 +105,7 @@ const userApi = {
     },
     passwordReset: async (id, token, newPassword, confirmPassword) => {
         try {
-            const response = await publicClient.put(
+            const response = await publicClient.patch(
                 userEndpoints.passwordReset(id, token),
                 { newPassword, confirmPassword }
             )

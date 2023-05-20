@@ -1,0 +1,71 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 1.5rem;
+}
+
+.login-input {
+    height: 2rem;
+    border-radius: 0.5em;
+    border-width: 0.15em;
+    border-color: var(--color-contrast);
+    border-style: solid;
+}
+
+.login-signup-link {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    align-self: flex-end;
+    font-family: sudo;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+}
+
+.login-form-btn,
+.login-google-btn {
+    font-family: 'Work sans';
+    font-weight: bold;
+    font-size: 1.5rem;
+    background-color: var(--color-primary);
+    border-radius: 0.5em;
+    border-width: 0.15em;
+    border-color: var(--color-contrast);
+    border-style: solid;
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+    padding-block: 0.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.login-google-btn-container{
+    display: flex;
+    justify-content: center;
+}
+
+.login-google-btn {
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    align-items: center;
+    width: 100%;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+}
+
+.login-separator {
+    align-items: center;
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: minmax(2.4rem,1fr) auto minmax(2.4rem,1fr);
+    margin: 0 1rem 1rem 1rem;
+    text-align: center;
+}
+
+.login-separator:after, .login-separator:before {
+    border-top: 1px solid black;
+    content: "";
+    transform-origin: center right;
+}

@@ -1,0 +1,13 @@
+.reset-password-input {
+    height: 2rem;
+    border-radius: 0.5em;
+    border-width: 0.15em;
+    border: 2px solid var(--color-contrast);
+}
+
+.reset-password-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-block: 1rem;
+}

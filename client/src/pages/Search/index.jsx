@@ -1,4 +1,4 @@
-import SearchMedia from "../components/SearchMedia";
+import SearchMedia from "../../components/SearchMedia"
 
 const Search = () => {
     return <SearchMedia />

@@ -75,7 +75,7 @@ const MediaList = ({ mediaList, mediaType }) => {
     }
 
     return (
-        <div>
+        <div className="media-list-container">
             {mediaList &&
                 mediaList.map((media, i) => {
                     const isAdded = watchlistMedia.some(

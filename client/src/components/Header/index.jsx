@@ -1,12 +1,19 @@
+import { useEffect, useState } from "react"
 import { useLogout } from "../../hooks/useLogout"
-import { useAuthContext } from "../../hooks/useAuthContext"
 import ToggleTheme from "./ToggleTheme"
 import "./index.css"
 
-const Header = () => {
+const Header = ({updateUser}) => {
     const { logout } = useLogout()
-    // const { user } = useAuthContext()
-    const user = JSON.parse(localStorage.getItem("user"))
+
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")))
+    
+    useEffect(() => {
+        if (updateUser) {
+            const updatedUser = JSON.parse(localStorage.getItem("user"));
+            setUser(updatedUser);
+          }
+      }, [updateUser])
 
     const handleClick = () => {
         logout()

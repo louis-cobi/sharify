@@ -55,7 +55,7 @@ router.get(
 
 router.get("/session", userController.getSession)
 
-router.put(
+router.patch(
     "/update-password",
     tokenMiddleware.auth,
     body("password")
@@ -63,23 +63,28 @@ router.put(
         .withMessage("password is required")
         .isLength({ min: 8 })
         .withMessage("password minimum 8 characters"),
-    body("newPassword")
-        .exists()
-        .withMessage("newPassword is required")
-        .isLength({ min: 8 })
-        .withMessage("newPassword minimum 8 characters"),
-    body("confirmNewPassword")
-        .exists()
-        .withMessage("confirmNewPassword is required")
-        .isLength({ min: 8 })
-        .withMessage("confirmNewPassword minimum 8 characters")
-        .custom((value, { req }) => {
-            if (value !== req.body.newPassword)
-                throw new Error("confirmNewPassword not match")
-            return true
-        }),
     requestHandler.validate,
     userController.updatePassword
+)
+
+router.patch(
+    "/update-username",
+    tokenMiddleware.auth,
+    body("email").exists().withMessage("email is required").isEmail(),
+    userController.updateUsername
+)
+
+router.patch(
+    "/update-email",
+    tokenMiddleware.auth,
+    body("username")
+        .exists()
+        .withMessage("username is required")
+        .custom(async (value) => {
+            const user = await userModel.findOne({ username: value })
+            if (user) return Promise.reject("username already used")
+        }),
+    userController.updateEmail
 )
 
 router.post("/send-reset", userController.sendPasswordReset)

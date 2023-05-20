@@ -47,7 +47,7 @@ const signin = async (req, res) => {
 
         const user = await userModel
             .findOne({ username })
-            .select("username password id image")
+            .select("username email password id image")
 
         if (!user) return responseHandler.badrequest(res, "User not exist")
 
@@ -68,6 +68,7 @@ const signin = async (req, res) => {
             token,
             ...user._doc,
             id: user.id,
+            email: user.email,
         })
     } catch {
         responseHandler.error(res)
@@ -76,20 +77,55 @@ const signin = async (req, res) => {
 
 const updatePassword = async (req, res) => {
     try {
-        const { password, newPassword } = req.body
+        const { password, id} = req.body
 
-        const user = await userModel.findById(req.user.id).select("password id")
+        const user = await userModel.findById(id).select("username email password id image")
 
         if (!user) return responseHandler.unauthorize(res)
-
-        const passwordMatch = await bcrypt.compare(newPassword, user.password)
-
-        if (!passwordMatch)
-            return responseHandler.badrequest(res, "Wrong password")
 
         const salt = await bcrypt.genSalt(10)
         const hash = await bcrypt.hash(password, salt)
         user.password = hash
+
+        await user.save()
+
+        responseHandler.ok(res, user)
+    } catch {
+        responseHandler.error(res)
+    }
+}
+
+const updateUsername = async (req, res) => {
+    try {
+        const { id, username } = req.body
+
+        const user = await userModel
+            .findById(id)
+            .select("username email id image")
+
+        if (!user) return responseHandler.unauthorize(res)
+
+        user.username = username
+
+        await user.save()
+
+        responseHandler.ok(res, user)
+    } catch {
+        responseHandler.error(res)
+    }
+}
+
+const updateEmail = async (req, res) => {
+    try {
+        const { id, email } = req.body
+
+        const user = await userModel
+            .findById(id)
+            .select("username email id image")
+
+        if (!user) return responseHandler.unauthorize(res)
+
+        user.email = email
 
         await user.save()
 
@@ -147,9 +183,13 @@ const sendPasswordReset = async (req, res) => {
             return responseHandler.badrequest(res, "User not found")
         }
 
-        const token = jsonwebtoken.sign({ data: emailExist._id }, process.env.TOKEN_SECRET, {
-            expiresIn: "10m",
-        })
+        const token = jsonwebtoken.sign(
+            { data: emailExist._id },
+            process.env.TOKEN_SECRET,
+            {
+                expiresIn: "10m",
+            }
+        )
 
         const link = `http://localhost:3000/reset-password/${emailExist._id}/${token}`
 
@@ -190,7 +230,10 @@ const passwordReset = async (req, res) => {
     try {
         if (newPassword || confirmPassword) {
             if (newPassword == confirmPassword) {
-                const validToken = jsonwebtoken.verify(token, process.env.TOKEN_SECRET)
+                const validToken = jsonwebtoken.verify(
+                    token,
+                    process.env.TOKEN_SECRET
+                )
                 if (validToken) {
                     const userInfo = await userModel.findOne({ _id: id })
                     if (userInfo) {
@@ -213,7 +256,7 @@ const passwordReset = async (req, res) => {
                     return responseHandler.badrequest(res, "Link expired")
                 }
             } else {
-                return  responseHandler.badrequest(res, "Password didn't match")
+                return responseHandler.badrequest(res, "Password didn't match")
             }
         } else {
             return responseHandler.badrequest(res, "Fields must be not empty")
@@ -229,8 +272,10 @@ export default {
     signin,
     searchUser,
     updatePassword,
+    updateUsername,
+    updateEmail,
     getInfo,
     getSession,
     sendPasswordReset,
-    passwordReset
+    passwordReset,
 }

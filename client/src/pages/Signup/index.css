@@ -1,0 +1,14 @@
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    margin-top: 1.5rem;
+}
+
+.signup-input {
+    height: 2rem;
+    border-radius: 0.5em;
+    border-width: 0.15em;
+    border-color: var(--color-contrast);
+    border-style: solid;
+}
