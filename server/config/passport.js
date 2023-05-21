@@ -46,7 +46,8 @@ const passportConfig = (passport) => {
                     { expiresIn: "24h" }
                 )
 
-                const userWithToken = { ...user, token: token }
+                // const userWithToken = { ...user, token: token }
+                const userWithToken = { ...user.toObject(), token: token }
                 req.session.user = userWithToken
                 return cb(null, userWithToken)
             }
