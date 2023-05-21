@@ -49,10 +49,11 @@ router.get(
     passport.authenticate("google", {
         successRedirect: "https://sharify-app.vercel.app/",
         failureRedirect: "https://sharify-app.vercel.app/login",
-    })
+    }) ,
+    userController.getSession
 )
 
-router.get("/session", passport.authenticate("google"), userController.getSession)
+router.get("/session", userController.getSession)
 
 router.patch(
     "/update-password",
