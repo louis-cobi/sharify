@@ -1,8 +1,9 @@
 import { useAuthContext } from "../../hooks/useAuthContext"
 import { useNavigate } from "react-router-dom"
 import UserWatchlists from "../../components/UserWatchlists"
-import FloattingButton from "../../components/common/FloattingButton"
+import FloattingButton from "../../components/common/FloatingButton"
 import "./index.css"
+import Title from "../../components/common/Title"
 
 const Home = () => {
     const { user } = useAuthContext()
@@ -14,7 +15,7 @@ const Home = () => {
 
     return (
         <>
-            <h1 className="welcome">Welcome</h1>
+            <Title text="Welcome" />
             <UserWatchlists />
             <FloattingButton onClick={() => handleCLick()} />
         </>

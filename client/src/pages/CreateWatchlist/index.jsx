@@ -31,10 +31,11 @@ const CreateWatchlist = () => {
     }
 
     const handleSubmit = async () => {
-        const { response, err } = await watchlistApi.create(title, emoji, users)
+        const emojiValue = emoji === "" ? ":clapper:" : emoji
+        const { response, err } = await watchlistApi.create(title, emojiValue, users)
         if (response) {
             navigate(`/search/${response.id}`)
-            toast.success("Watchlist successfully created")
+            toast.success(`${response.title} successfully created`)
         }
         if (err) {
             toast.error(err.message)

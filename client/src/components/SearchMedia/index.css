@@ -7,6 +7,9 @@
     display: flex;
     align-items: center;
     margin: auto;
+    background: var(--bg-color-secondary);
+    font-family: sudo;
+    font-weight: bold;
 }
 
 .search-media-bar-input {
@@ -62,6 +65,7 @@
     display: flex;
     gap: 1rem;
     width: 100%;
+    align-items: center;
 }
 
 .media-content-image {
@@ -74,5 +78,32 @@
 
 .media-content-title {
     flex-grow: 1;
-    margin: 0.5rem 0 0 0;
+}
+
+.search-media-button-add,
+.search-media-button-remove {
+    display: flex;
+    justify-content: center;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 10px;
+    border: 2px solid var(--color-contrast);
+}
+
+.search-media-button-add {
+    background-color: var(--color-secondary);
+}
+
+.search-media-button-remove {
+    background-color: var(--color-tertiary);
+}
+
+.search-media-empty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: sudo;
+    font-weight: bold;
+    margin: 2rem;
 }

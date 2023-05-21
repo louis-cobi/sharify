@@ -18,7 +18,11 @@
     margin-bottom: 1em;
 }
 
-.profil-username, .profil-email{
+.profil-username, .profil-email, .profil-password{
     margin-bottom: 1em;
+}
+
+.profil-edit-icon{
+    margin-left: 0.5rem;
 }
 

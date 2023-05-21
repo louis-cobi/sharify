@@ -105,7 +105,7 @@ const Profil = ({onUserUpdate}) => {
                                         }
                                         onBlur={handleUsernameBlur}
                                     />
-                                    <FontAwesomeIcon icon={faPenToSquare} />
+                                    <FontAwesomeIcon icon={faPenToSquare} className="profil-edit-icon"/>
                                 </>
                             ) : (
                                 <>
@@ -113,6 +113,7 @@ const Profil = ({onUserUpdate}) => {
                                     <FontAwesomeIcon
                                         icon={faPenToSquare}
                                         onClick={() => setEditingUsername(true)}
+                                        className="profil-edit-icon"
                                     />
                                 </>
                             )}
@@ -128,7 +129,7 @@ const Profil = ({onUserUpdate}) => {
                                         }
                                         onBlur={handleEmailBlur}
                                     />
-                                    <FontAwesomeIcon icon={faPenToSquare} />
+                                    <FontAwesomeIcon icon={faPenToSquare} className="profil-edit-icon"/>
                                 </>
                             ) : (
                                 <>
@@ -136,11 +137,12 @@ const Profil = ({onUserUpdate}) => {
                                     <FontAwesomeIcon
                                         icon={faPenToSquare}
                                         onClick={() => setEditingEmail(true)}
+                                        className="profil-edit-icon"
                                     />
                                 </>
                             )}
                         </div>
-                        <div className="profil-passwod">
+                        <div className="profil-password">
                             {editingPassword ? (
                                 <>
                                     <input
@@ -151,7 +153,7 @@ const Profil = ({onUserUpdate}) => {
                                         }
                                         onBlur={handlePasswordBlur}
                                     />
-                                    <FontAwesomeIcon icon={faPenToSquare} />
+                                    <FontAwesomeIcon icon={faPenToSquare} className="profil-edit-icon"/>
                                 </>
                             ) : (
                                 <>
@@ -159,11 +161,12 @@ const Profil = ({onUserUpdate}) => {
                                     <FontAwesomeIcon
                                         icon={faPenToSquare}
                                         onClick={() => setEditingPassword(true)}
+                                        className="profil-edit-icon"
                                     />
                                 </>
                             )}
                         </div>
-                        <Button text="Logout" onClick={handleLogout} />
+                        <Button text="Logout" onClick={handleLogout} className="profil-edit-icon"/>
                     </div>
                 )}
             </div>

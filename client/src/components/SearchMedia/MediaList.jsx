@@ -46,6 +46,7 @@ const MediaList = ({ mediaList, mediaType }) => {
             poster_path
         })
         if (response) {
+            toast.success(`successfully add to ${response.title}`)
             setWatchlistMedia(response.medias)
         }
         if (err) {
@@ -67,6 +68,7 @@ const MediaList = ({ mediaList, mediaType }) => {
             backdrop_path,
         })
         if (response) {
+            toast.success(`successfully remove from ${response.title}`)
             setWatchlistMedia(response.medias)
         }
         if (err) {

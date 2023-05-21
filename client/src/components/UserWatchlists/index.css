@@ -1,3 +1,8 @@
+.user-watchlist-container{
+    margin-left: 10vw;
+    margin-right: 10vw;
+}
+
 .user-watchlist-item{
     display: flex;
     flex-direction: row;
@@ -30,4 +35,14 @@
 
 .user-watchlist-dropdown{
     margin-right: 1em;
+}
+
+.user-watchlist-empty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: sudo;
+    font-weight: bold;
+    margin: 2rem;
 }

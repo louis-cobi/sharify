@@ -4,9 +4,10 @@ import { toast } from "react-toastify"
 import watchlistApi from "../../api/modules/watchlist.api"
 import Title from "../../components/common/Title"
 import WatchlistItem from "../../components/WatchlistItem"
-import './index.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSliders } from "@fortawesome/free-solid-svg-icons"
+import FloattingButton from "../../components/common/FloatingButton"
+import './index.css'
 
 const Watchlist = () => {
     const navigate = useNavigate()
@@ -55,6 +56,10 @@ const Watchlist = () => {
         }
     }
 
+    const handleAdd = () => {
+        navigate(`/search/${watchlistId}`)
+    }
+
     return (
         <div>
             <Title text="My watch list"/>
@@ -80,6 +85,7 @@ const Watchlist = () => {
                         })}
                 </div>
             </div>
+            <FloattingButton onClick={() => handleAdd()} />
         </div>
     )
 }

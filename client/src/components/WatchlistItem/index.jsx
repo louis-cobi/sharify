@@ -15,7 +15,7 @@ const WatchlistItem = ({media, onNavigate, onRemove}) => {
                 className="watchlist-media-list-image"
             />
             <p className="watchlist-media-list-title">{media.title}</p>
-            <Dropdown icon={<FontAwesomeIcon icon={faEllipsisVertical} style={{color: "#000000",}} />}>
+            <Dropdown icon={<FontAwesomeIcon icon={faEllipsisVertical} size="2x" />}>
                 <div onClick={(e) => onNavigate(e, media._id)} >Consult </div>
                 <div onClick={(e) => onRemove(e, media)}>Remove </div>
             </Dropdown>

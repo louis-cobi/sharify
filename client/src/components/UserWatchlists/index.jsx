@@ -54,8 +54,21 @@ const UserWatchlists = () => {
             toast.error(err.message)
         }
     }
+
+    if (watchlists.length === 0) {
+        return (
+            <div className="user-watchlist-empty">
+                <div>🤔</div>
+                <p>
+                    It seems that you don't have any watchlist yet. Click the +
+                    button in below right corner to create one.
+                </p>
+            </div>
+        )
+    }
+
     return (
-        <div>
+        <div className="user-watchlist-container">
             {watchlists &&
                 watchlists.map((watchlist, i) => {
                     return (

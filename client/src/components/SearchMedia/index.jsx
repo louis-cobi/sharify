@@ -6,7 +6,7 @@ import Title from "../common/Title"
 import MediaList from "./MediaList"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons"
-import './index.css'
+import "./index.css"
 
 const SearchMedia = () => {
     const [search, setSearch] = useState("")
@@ -41,32 +41,51 @@ const SearchMedia = () => {
         setSearch(event.target.value)
     }
 
+    const handleMediaTypeText = () => {
+        return mediaType === "movie" ? "Movie" : "Serie"
+    }
+
     return (
         <div>
-            <Title text="Film" />
-            <Dropdown icon={mediaType}>
-                <div
-                    onClick={() => {
-                        setMediaType(tmdbConfigs.mediaType.movie)
-                    }}
-                >
-                    {tmdbConfigs.mediaType.movie}
-                </div>
-                <div
-                    onClick={() => {
-                        setMediaType(tmdbConfigs.mediaType.tv)
-                    }}
-                >
-                    {tmdbConfigs.mediaType.tv}
-                </div>
-            </Dropdown>
+            <Title text={handleMediaTypeText()} />
             <div className="search-media-bar">
-                <input type="search" onChange={handleTextChange} className="search-media-bar-input"/>
+                <Dropdown icon={handleMediaTypeText()} right={true}>
+                    <div
+                        onClick={() => {
+                            setMediaType(tmdbConfigs.mediaType.movie)
+                        }}
+                    >
+                        Movies
+                    </div>
+                    <div
+                        onClick={() => {
+                            setMediaType(tmdbConfigs.mediaType.tv)
+                        }}
+                    >
+                        Series
+                    </div>
+                </Dropdown>
+                <input
+                    type="search"
+                    onChange={handleTextChange}
+                    className="search-media-bar-input"
+                />
                 <div className="search-media-bar-icon">
-                    <FontAwesomeIcon icon={faMagnifyingGlass}/>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </div>
             </div>
-            {result && <MediaList mediaList={result} mediaType={mediaType} />}
+            {search === "" ? (
+                <div className="search-media-empty">
+                    <p>
+                        Start typing to search for movies. If you're looking for
+                        TV shows, click on 'Movie' in the search field and
+                        select 'Series'
+                    </p>
+                    <div>🍿</div>
+                </div>
+            ) : (
+                <MediaList mediaList={result} mediaType={mediaType} />
+            )}
         </div>
     )
 }
