@@ -49,12 +49,12 @@ const passportConfig = (passport) => {
                 const userWithToken = { ...user, token: token }
                 // const userWithToken = { ...user.toObject(), token: token }
                 req.session.user = userWithToken
-                req.session.save((err) => {
-                    if (err) {
-                      return cb(err);
-                    }
-                    return cb(null, userWithToken);
-                  })
+                // req.session.save((err) => {
+                //     if (err) {
+                //       return cb(err);
+                //     }
+                //     return cb(null, userWithToken);
+                //   })
                 return cb(null, userWithToken)
             }
         )
