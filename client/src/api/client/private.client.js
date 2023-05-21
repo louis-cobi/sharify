@@ -1,6 +1,6 @@
 import queryString from "query-string"
 
-const baseURL = "http://localhost:5001/api/"
+const baseURL = "https://sharify-api.vercel.app/api/"
 
 
 const privateClient = {

@@ -21,7 +21,7 @@ const Login = () => {
     }
 
     const handleGoogleAuth = async () => {
-        window.open("http://localhost:5001/api/user/auth/google", "_self")
+        window.open("https://sharify-api.vercel.app/api/user/auth/google", "_self")
     }
 
     const renderLoginForm = () => {

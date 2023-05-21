@@ -191,7 +191,7 @@ const sendPasswordReset = async (req, res) => {
             }
         )
 
-        const link = `http://localhost:3000/reset-password/${emailExist._id}/${token}`
+        const link = `https://sharify-app.vercel.app/reset-password/${emailExist._id}/${token}`
 
         let transporter = nodemailer.createTransport({
             service: "gmail",

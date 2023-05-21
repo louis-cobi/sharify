@@ -47,8 +47,8 @@ router.get(
 router.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-        successRedirect: "http://localhost:3000/",
-        failureRedirect: "http://localhost:3000/login",
+        successRedirect: "https://sharify-app.vercel.app/",
+        failureRedirect: "https://sharify-app.vercel.app/login",
         session: false,
     })
 )

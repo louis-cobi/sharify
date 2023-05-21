@@ -22,7 +22,7 @@ const passportConfig = (passport) => {
                 clientID: process.env.GOOGLE_CLIENT_ID,
                 clientSecret: process.env.GOOGLE_CLIENT_SECRET,
                 callbackURL:
-                    "http://localhost:5001/api/user/auth/google/callback",
+                    "https://sharify-api.vercel.app//api/user/auth/google/callback",
                 session: false,
                 passReqToCallback: true,
             },
