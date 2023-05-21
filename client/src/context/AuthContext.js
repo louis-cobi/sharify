@@ -24,7 +24,12 @@ export const AuthContextProvider = ({ children }) => {
         const sessionUser = async () => {
             const user = JSON.parse(localStorage.getItem("user"))
             if (user === null) {
-                const response = await fetch("https://sharify-api.vercel.app/api/user/session")
+                const response = await fetch("https://sharify-api.vercel.app/api/user/session",{
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    method: 'GET'
+                })
                 const json = await response.json()
                 if (response.ok) {
                     localStorage.setItem("user", JSON.stringify(json))
