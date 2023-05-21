@@ -24,6 +24,7 @@ const passportConfig = (passport) => {
                 callbackURL:
                     "https://sharify-api.vercel.app/api/user/auth/google/callback",
                 passReqToCallback: true,
+                session: false,
             },
             async (req, accessToken, refreshToken, profile, cb) => {
                 const email = profile.emails[0].value
@@ -44,8 +45,8 @@ const passportConfig = (passport) => {
                     process.env.TOKEN_SECRET,
                     { expiresIn: "24h" }
                 )
-                // const userWithToken = {...user, token: token}
-                const userWithToken = { id: user.id, token: token }
+                const userWithToken = {...user, token: token}
+                // const userWithToken = { id: user.id, token: token }
                 req.session.user = userWithToken
                 console.log("passport session :", req.session.user)
                 return cb(null, userWithToken)
