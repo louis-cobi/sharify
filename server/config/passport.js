@@ -44,7 +44,7 @@ const passportConfig = (passport) => {
                     process.env.TOKEN_SECRET,
                     { expiresIn: "24h" }
                 )
-
+                // const userWithToken = {...user, token: token}
                 const userWithToken = { id: user.id, token: token }
                 req.session.user = userWithToken
                 console.log("passport session :", req.session.user)
