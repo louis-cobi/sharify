@@ -168,9 +168,23 @@ const getSession = async (req, res) => {
     try {
         console.log("session :", req.session)
         console.log("session.user :", req.session.user)
-        const { _doc, token } = req.session.user
-        const userResponse = { ..._doc, token: token }
-        responseHandler.ok(res, userResponse)
+        // const { _doc, token } = req.session.user
+        // const userResponse = { ..._doc, token: token }
+        const { user } = req.session.user
+        const OauthUser = await userModel.findById(user)
+        const token = jsonwebtoken.sign(
+            { data: OauthUser.id },
+            process.env.TOKEN_SECRET,
+            { expiresIn: "24h" }
+        )
+        // responseHandler.ok(res, userResponse)
+        responseHandler.ok(res, 
+            {
+                token,
+                ...OauthUser._doc,
+                id: OauthUser.id,
+                email: OauthUser.email,
+            })
     } catch {
         responseHandler.badrequest(res, req.session)
     }
