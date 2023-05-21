@@ -46,11 +46,6 @@ const passportConfig = (passport) => {
                 )
                 // const userWithToken = {...user, token: token}
                 const userWithToken = { id: user.id, token: token }
-                res.cookie("userWithToken", userWithToken, {
-                    maxAge: 24 * 60 * 60 * 1000, // Durée de validité du cookie de session (24 heures dans cet exemple)
-                    httpOnly: true,
-                    // other cookie options if needed
-                });
                 req.session.user = userWithToken
                 console.log("passport session :", req.session.user)
                 return cb(null, userWithToken)
