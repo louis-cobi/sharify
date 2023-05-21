@@ -27,4 +27,12 @@ const userSchema = new mongoose.Schema(
 
 const userModel = mongoose.model("User", userSchema, "users");
 
+userSchema.methods.serializeUser = function() {
+  return this._id;
+};
+
+userSchema.statics.deserializeUser = async function(id) {
+  return await this.findById(id);
+};
+
 export default userModel;
