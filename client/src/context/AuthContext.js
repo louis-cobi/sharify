@@ -30,9 +30,7 @@ export const AuthContextProvider = ({ children }) => {
                 //     },
                 //     method: 'GET'
                 // })
-                const response = await fetch("https://sharify-api.vercel.app/api/user/session", {
-                    credentials: 'include'
-                  })
+                const response = await fetch("https://sharify-api.vercel.app/api/user/session")
                 const json = await response.json()
                 if (response.ok) {
                     localStorage.setItem("user", JSON.stringify(json))
