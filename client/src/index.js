@@ -5,6 +5,7 @@ import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 import { AuthContextProvider } from "./context/AuthContext"
 import { ThemeContextProvider } from "./context/ThemeContext"
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
@@ -16,5 +17,7 @@ root.render(
         </ThemeContextProvider>
     </React.StrictMode>
 )
+
+serviceWorkerRegistration.register();
 
 reportWebVitals()
