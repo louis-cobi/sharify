@@ -47,10 +47,14 @@ router.get(
 router.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-        successRedirect: "https://sharify-app.vercel.app/",
+        // successRedirect: "https://sharify-app.vercel.app/",
+        successRedirect: "https://sharify-api.vercel.app/user/session",
         failureRedirect: "https://sharify-app.vercel.app/login",
-    }) ,
-    userController.getSession
+    }),
+    (req, res) => {
+        // La redirection réussie depuis Google renvoie la session mise à jour au client
+        res.json(req.session.user)
+    }
 )
 
 router.get("/session", userController.getSession)
