@@ -2,6 +2,7 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20"
 import userModel from "../models/user.model.js"
 import jsonwebtoken from "jsonwebtoken"
+import mongoose from "mongoose";
 
 const passportConfig = (passport) => {
     // Serialize user ID
@@ -11,8 +12,9 @@ const passportConfig = (passport) => {
 
     // Deserialize user by ID
     passport.deserializeUser(async (id, done) => {
-        const user = await userModel.findById(id)
-        done(null, user)
+        const userId = mongoose.Types.ObjectId(id);
+        const user = await userModel.findById(userId);
+        done(null, user);
     })
 
     // Configure Google OAuth20 strategy
