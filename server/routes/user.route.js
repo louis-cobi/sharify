@@ -52,7 +52,7 @@ router.get(
     })
 )
 
-router.get("/session", userController.getSession)
+router.get("/session", passport.authenticate("google"), userController.getSession)
 
 router.patch(
     "/update-password",
