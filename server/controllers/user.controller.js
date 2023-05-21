@@ -186,7 +186,7 @@ const getSession = async (req, res) => {
                 email: OauthUser.email,
             })
     } catch {
-        responseHandler.badrequest(res, req.cookies)
+        responseHandler.badrequest(res, req.session)
     }
 }
 

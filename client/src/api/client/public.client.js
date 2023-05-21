@@ -9,7 +9,8 @@ const privateClient = {
             headers: {
                 "Content-Type": "application/json",
             },
-            method: 'GET'
+            method: 'GET',
+            credentials: "include",
         }
         if (body) {
             options.body = JSON.stringify(body);
@@ -31,7 +32,8 @@ const privateClient = {
             headers: {
                 "Content-Type": "application/json",
             },
-            method: 'POST'
+            method: 'POST',
+            credentials: "include",
         }
         if (body) {
             options.body = JSON.stringify(body);
