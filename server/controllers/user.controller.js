@@ -170,7 +170,7 @@ const getSession = async (req, res) => {
         console.log("session.user :", req.session.user)
         // const { _doc, token } = req.session.user
         // const userResponse = { ..._doc, token: token }
-        const { user } = req.user
+        const { user } = req.session.passport.user
         const OauthUser = await userModel.findById(user)
         const token = jsonwebtoken.sign(
             { data: OauthUser.id },
@@ -186,7 +186,7 @@ const getSession = async (req, res) => {
                 email: OauthUser.email,
             })
     } catch {
-        responseHandler.badrequest(res, req.user)
+        responseHandler.badrequest(res, req.session)
     }
 }
 
