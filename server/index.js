@@ -48,7 +48,10 @@ passportConfig(passport);
 
 
 
-app.use(cors())
+app.use(cors({
+    origin: 'https://sharify-app.vercel.app',
+    credentials: true
+  }))
 app.use("/api", routes)
 
 const port = process.env.PORT || 5001;
