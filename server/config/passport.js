@@ -2,19 +2,17 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20"
 import userModel from "../models/user.model.js"
 import jsonwebtoken from "jsonwebtoken"
-import mongoose from "mongoose";
 
 const passportConfig = (passport) => {
     // Serialize user ID
     passport.serializeUser((user, done) => {
-        done(null, user._id)
+        done(null, user.id)
     })
 
     // Deserialize user by ID
     passport.deserializeUser(async (id, done) => {
-        const userId = mongoose.Types.ObjectId(id);
-        const user = await userModel.findById(userId);
-        done(null, user);
+        const user = await userModel.findById(id)
+        done(null, user)
     })
 
     // Configure Google OAuth20 strategy
@@ -48,14 +46,7 @@ const passportConfig = (passport) => {
                 )
 
                 const userWithToken = { ...user, token: token }
-                // const userWithToken = { ...user.toObject(), token: token }
                 req.session.user = userWithToken
-                // req.session.save((err) => {
-                //     if (err) {
-                //       return cb(err);
-                //     }
-                //     return cb(null, userWithToken);
-                //   })
                 console.log("passport session :", req.session.user)
                 return cb(null, userWithToken)
             }
