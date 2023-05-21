@@ -55,6 +55,7 @@ const passportConfig = (passport) => {
                 //     }
                 //     return cb(null, userWithToken);
                 //   })
+                console.log("passport session :", req.session.user)
                 return cb(null, userWithToken)
             }
         )

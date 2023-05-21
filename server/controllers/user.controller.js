@@ -166,6 +166,8 @@ const getInfo = async (req, res) => {
 
 const getSession = async (req, res) => {
     try {
+        console.log("session :", req.session)
+        console.log("session.user :", req.session.user)
         const { _doc, token } = req.session.user
         const userResponse = { ..._doc, token: token }
         responseHandler.ok(res, userResponse)
