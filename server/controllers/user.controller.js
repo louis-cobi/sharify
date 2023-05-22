@@ -176,8 +176,8 @@ const getSession = async (req, res) => {
             { expiresIn: "24h" }
         )
         responseHandler.ok(res, {...googleUser._doc, token})
-    } catch {
-        const stringReq = JSON.stringify(req)
+    } catch (error){
+        const stringReq = JSON.stringify(error)
         responseHandler.badrequest(res, stringReq)
     }
 }
