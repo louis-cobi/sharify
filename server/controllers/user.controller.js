@@ -173,10 +173,9 @@ const getSession = async (req, res) => {
         responseHandler.ok(res, userResponse)
     } catch {
         const user1 = req.session.passport.user
-        const { user } = req.session.passport
-        const { passport } = req.session
+        const  passport  = req.session.passport
         const reqUser = req.user
-        const message = { ...user, ...passport, ...reqUser, ...user1 }
+        const message = { ...passport, ...reqUser, ...user1 }
         responseHandler.badrequest(res, message)
     }
 }
