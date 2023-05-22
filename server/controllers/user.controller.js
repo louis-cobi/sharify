@@ -168,8 +168,8 @@ const getInfo = async (req, res) => {
 
 const getSession = async (req, res) => {
     try {
-        const {userId} = req.params
-        const user = await userModel.findById(userId)
+        const {id} = req.params
+        const user = await userModel.findById(id)
         const token = jsonwebtoken.sign(
             { data: user.id },
             process.env.TOKEN_SECRET,

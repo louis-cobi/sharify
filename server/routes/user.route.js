@@ -55,7 +55,7 @@ router.get(
       }    
 )
 
-router.get("/session", userController.getSession)
+router.get("/session/:id", userController.getSession)
 
 
 router.patch(
