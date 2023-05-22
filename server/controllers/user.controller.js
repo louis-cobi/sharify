@@ -176,7 +176,7 @@ const getSession = async (req, res) => {
         // const { user } = req.session.passport
         // const { passport } = req.session
         // const reqUser = req.user
-        responseHandler.badrequest(res, req)
+        responseHandler.badrequest(res, req.session)
     }
 }
 
