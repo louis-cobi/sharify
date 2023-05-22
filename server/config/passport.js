@@ -49,7 +49,7 @@ const passportConfig = (passport) => {
                 // const userWithToken = { id: user.id, token: token }
                 req.session.user = userWithToken
                 console.log("passport session :", req.session.user)
-                return cb(null, userWithToken)
+                return cb(null, req.session)
             }
         )
     )
