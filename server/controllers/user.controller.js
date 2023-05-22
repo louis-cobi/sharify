@@ -168,7 +168,7 @@ const getInfo = async (req, res) => {
 
 const getSession = async (req, res) => {
     try {
-        const { user } = req.session.passport
+        const user = req.user
         const googleUser = await userModel.findById(user)
         const token = jsonwebtoken.sign(
             { data: googleUser.id },
@@ -177,7 +177,7 @@ const getSession = async (req, res) => {
         )
         responseHandler.ok(res, {...googleUser._doc, token})
     } catch {
-        responseHandler.badrequest(res, req.session)
+        responseHandler.badrequest(res, req.user)
     }
 }
 
