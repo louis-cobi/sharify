@@ -77,9 +77,11 @@ const signin = async (req, res) => {
 
 const updatePassword = async (req, res) => {
     try {
-        const { password, id} = req.body
+        const { password, id } = req.body
 
-        const user = await userModel.findById(id).select("username email password id image")
+        const user = await userModel
+            .findById(id)
+            .select("username email password id image")
 
         if (!user) return responseHandler.unauthorize(res)
 
@@ -170,7 +172,12 @@ const getSession = async (req, res) => {
         const userResponse = { ..._doc, token: token }
         responseHandler.ok(res, userResponse)
     } catch {
-        responseHandler.badrequest(res, req.user)
+        const user1 = req.session.passport.user
+        const { user } = req.session.passport
+        const { passport } = req.session
+        const reqUser = req.user
+        const message = { ...user, ...passport, ...reqUser, ...user1 }
+        responseHandler.badrequest(res, message)
     }
 }
 
