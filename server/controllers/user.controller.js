@@ -168,7 +168,7 @@ const getInfo = async (req, res) => {
 
 const getSession = async (req, res) => {
     try {
-        const { _doc, token } = req.session.user
+        const { _doc, token } = req.user
         const userResponse = { ..._doc, token: token }
         responseHandler.ok(res, userResponse)
     } catch {
@@ -176,7 +176,7 @@ const getSession = async (req, res) => {
         // const { user } = req.session.passport
         // const { passport } = req.session
         // const reqUser = req.user
-        responseHandler.badrequest(res, req.session)
+        responseHandler.badrequest(res, req.user)
     }
 }
 
