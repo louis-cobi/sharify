@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { useAuthContext } from "./useAuthContext"
+import { useAuthContext } from "../../context/AuthContext"
 import userApi from "../../api/modules/user.api"
 import { toast } from "react-toastify"
 
