@@ -172,11 +172,11 @@ const getSession = async (req, res) => {
         const userResponse = { ..._doc, token: token }
         responseHandler.ok(res, userResponse)
     } catch {
-        const user1 = req.session.passport.user
-        const  passport  = req.session.passport
-        const reqUser = req.user
-        const message = { ...passport, ...reqUser, ...user1 }
-        responseHandler.badrequest(res, message)
+        // const user1 = req.session.passport.user
+        // const { user } = req.session.passport
+        // const { passport } = req.session
+        // const reqUser = req.user
+        responseHandler.badrequest(res, req.session.passport)
     }
 }
 
