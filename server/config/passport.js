@@ -24,7 +24,7 @@ const passportConfig = (passport) => {
                 callbackURL:
                     "https://sharify-api.vercel.app/api/user/auth/google/callback",
                 passReqToCallback: true,
-                session: false,
+                // session: false,
             },
             async (req, accessToken, refreshToken, profile, cb) => {
                 const email = profile.emails[0].value
