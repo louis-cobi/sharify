@@ -10,7 +10,8 @@ const userEndpoints = {
     usernameUpdate: "user/update-username",
     emailUpdate: "user/update-email",
     sendReset: "user/send-reset",
-    passwordReset: (id, token) => `user/reset-password/${id}/${token}`
+    passwordReset: (id, token) => `user/reset-password/${id}/${token}`,
+    getSession: "user/session",
 }
 
 const userApi = {
@@ -109,6 +110,16 @@ const userApi = {
                 userEndpoints.passwordReset(id, token),
                 { newPassword, confirmPassword }
             )
+            return { response }
+        } catch (err) {
+            return { err }
+        }
+    },
+    getSession: async (userId) => {
+        try {
+            const response = await publicClient.get(userEndpoints.getSession, {
+                userId,
+            })
             return { response }
         } catch (err) {
             return { err }

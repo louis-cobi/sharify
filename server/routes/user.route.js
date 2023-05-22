@@ -51,13 +51,12 @@ router.get(
         failureRedirect: "https://sharify-app.vercel.app/login",
         // session: false
     }), function(req, res) {
-        res.redirect("https://sharify-app.vercel.app/" + req.user);
+        res.redirect("https://sharify-app.vercel.app/google/" + req.user._id);
       }    
 )
 
-// router.get("/session", userController.getSession)
+router.get("/session", userController.getSession)
 
-router.get("/session", passport.authenticate('session'), userController.getSession)
 
 router.patch(
     "/update-password",

@@ -168,14 +168,14 @@ const getInfo = async (req, res) => {
 
 const getSession = async (req, res) => {
     try {
-        const user = req.user
-        const googleUser = await userModel.findById(user)
+        const {userId} = req.body
+        const user = await userModel.findById(userId)
         const token = jsonwebtoken.sign(
-            { data: googleUser.id },
+            { data: user.id },
             process.env.TOKEN_SECRET,
             { expiresIn: "24h" }
         )
-        responseHandler.ok(res, {...googleUser._doc, token})
+        responseHandler.ok(res, {...user._doc, token})
     } catch (error){
         const stringReq = JSON.stringify(error)
         responseHandler.badrequest(res, stringReq)

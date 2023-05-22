@@ -22,6 +22,7 @@ import UpdateWatchlist from "./pages/UpdateWatchlist"
 import SendResetPassword from "./pages/SendResetPassword"
 import ResetPassword from "./pages/ResetPassword"
 import Profil from "./pages/Profil"
+import GoogleAuth from "./pages/GoogleAuth"
 
 function App() {
     init({ data })
@@ -52,6 +53,7 @@ function App() {
                     />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
+                    <Route path="/google/:userId" element={<GoogleAuth />} />
                     <Route
                         path="/profil"
                         element={
