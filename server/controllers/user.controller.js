@@ -168,9 +168,14 @@ const getInfo = async (req, res) => {
 
 const getSession = async (req, res) => {
     try {
-        const { _doc, token } = req.session
-        const userResponse = { ..._doc, token: token }
-        responseHandler.ok(res, userResponse)
+        const { user } = req.session.passport
+        const googleUser = await userModel.findById(user)
+        const token = jsonwebtoken.sign(
+            { data: googleUser.id },
+            process.env.TOKEN_SECRET,
+            { expiresIn: "24h" }
+        )
+        responseHandler.ok(res, {...googleUser._doc, token})
     } catch {
         responseHandler.badrequest(res, req.session)
     }
