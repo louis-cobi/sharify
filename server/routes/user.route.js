@@ -49,7 +49,7 @@ router.get(
     passport.authenticate("google", {
         successRedirect: "https://sharify-app.vercel.app/",
         failureRedirect: "https://sharify-app.vercel.app/login",
-        // session: false
+        session: false
     })
 )
 
