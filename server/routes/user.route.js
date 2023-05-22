@@ -53,9 +53,9 @@ router.get(
     })
 )
 
-router.get("/session", userController.getSession)
+// router.get("/session", userController.getSession)
 
-// router.get("/session", passport.authenticate('session'), userController.getSession)
+router.get("/session", passport.authenticate('session'), userController.getSession)
 
 router.patch(
     "/update-password",
