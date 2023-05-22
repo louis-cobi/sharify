@@ -170,7 +170,7 @@ const getSession = async (req, res) => {
         const userResponse = { ..._doc, token: token }
         responseHandler.ok(res, userResponse)
     } catch {
-        responseHandler.badrequest(res, req.session)
+        responseHandler.badrequest(res, req.user)
     }
 }
 
