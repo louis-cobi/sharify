@@ -47,10 +47,12 @@ router.get(
 router.get(
     "/auth/google/callback",
     passport.authenticate("google", {
-        successRedirect: "https://sharify-app.vercel.app/",
+        // successRedirect: "https://sharify-app.vercel.app/",
         failureRedirect: "https://sharify-app.vercel.app/login",
         // session: false
-    })
+    }), function(req, res) {
+        res.redirect("https://sharify-app.vercel.app/" + req.user);
+      }    
 )
 
 // router.get("/session", userController.getSession)
