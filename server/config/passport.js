@@ -26,7 +26,8 @@ const passportConfig = (passport) => {
                 passReqToCallback: true,
                 // session: false,
             },
-            async (req, accessToken, refreshToken, profile, cb) => {
+            // async (req, accessToken, refreshToken, profile, cb) => {
+            async (accessToken, refreshToken, profile, cb) => {
                 const email = profile.emails[0].value
                 const image = profile.photos[0].value
                 let user = await userModel.findOne({ email })
@@ -49,7 +50,7 @@ const passportConfig = (passport) => {
                 // req.session.user = userWithToken
                 // req.session.cookie = {...req.session.cookie, userWithToken}
                 // req.session.save()
-                return cb(null, user._id)
+                return cb(null, user)
             }
         )
     )
