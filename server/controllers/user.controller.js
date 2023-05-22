@@ -177,7 +177,8 @@ const getSession = async (req, res) => {
         )
         responseHandler.ok(res, {...googleUser._doc, token})
     } catch {
-        responseHandler.badrequest(res, req.user)
+        const stringReq = JSON.stringify(req)
+        responseHandler.badrequest(res, stringReq)
     }
 }
 
