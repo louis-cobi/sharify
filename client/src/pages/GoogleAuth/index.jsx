@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import userApi from "../../api/modules/user.api"
 import { toast } from "react-toastify"
@@ -13,8 +13,8 @@ const GoogleAuth = () => {
             const { response, err } = await userApi.getSession(userId)
             if (response) {
                 localStorage.setItem("user", JSON.stringify(response))
-                setIsLoading(false)
                 toast.success(`Welcome ${response.username}`)
+                setIsLoading(false)
             }
             if (err) {
                 toast.error(err.message)
