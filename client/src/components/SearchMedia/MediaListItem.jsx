@@ -33,11 +33,11 @@ const MediaListItem = ({
                     </p>
                     {watchlistId ? (
                         isAdded ? (
-                            <button onClick={(e) => onRemove(e, media)} className="search-media-button-add">
+                            <button onClick={(e) => onRemove(e, media)} className="search-media-button-remove">
                                 <FontAwesomeIcon icon={faPlus} size="2x" />
                             </button>
                         ) : (
-                            <button onClick={(e) => onAdd(e, media)} className="search-media-button-remove">
+                            <button onClick={(e) => onAdd(e, media)} className="search-media-button-add">
                                 <FontAwesomeIcon icon={faXmark} size="2x" />
                             </button>
                         )

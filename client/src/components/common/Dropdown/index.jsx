@@ -26,12 +26,12 @@ const Dropdown = ({ icon, children, left, center, right }) => {
         setIsOpen(!isOpen)
     }
 
-    const handleItemClick = (e, props) => {
-        e.stopPropagation()
-        const { onClick } = props
-        onClick()
-        setIsOpen(false)
-    }
+    // const handleItemClick = (e, props) => {
+    //     e.stopPropagation()
+    //     const { onClick } = props
+    //     onClick()
+    //     setIsOpen(false)
+    // }
 
     const className = () => {
         if (left) {
@@ -54,7 +54,7 @@ const Dropdown = ({ icon, children, left, center, right }) => {
             {isOpen && (
                 <div className={className()}>
                     {React.Children.map(children, (child) => (
-                        <div onClick={(e) => handleItemClick(e, child.props)} className="dropdown-content-child">
+                        <div className="dropdown-content-child">
                             {child}
                         </div>
                     ))}

@@ -27,7 +27,11 @@ const MediaList = ({ mediaList, mediaType }) => {
     const navigate = useNavigate()
 
     const handleNavigate = (mediaId) => {
-        navigate(`/detail/${mediaType}/${mediaId}`)
+        if (watchlistId) {
+            navigate(`/detail/${mediaType}/${mediaId}/${watchlistId}`)
+        } else {
+            navigate(`/detail/${mediaType}/${mediaId}`)
+        }
     }
 
     const handleAdd = async (e, media) => {
@@ -43,7 +47,7 @@ const MediaList = ({ mediaList, mediaType }) => {
             title,
             type,
             backdrop_path,
-            poster_path
+            poster_path,
         })
         if (response) {
             toast.success(`successfully add to ${response.title}`)
