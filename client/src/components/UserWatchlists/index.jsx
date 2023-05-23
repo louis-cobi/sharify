@@ -4,10 +4,12 @@ import { toast } from "react-toastify"
 import watchlistApi from "../../api/modules/watchlist.api"
 import UserWatchlistItem from "./UserWatchlistItem"
 import "./index.css"
+import Skeleton from "./skeleton"
 
 const UserWatchlists = () => {
     const user = JSON.parse(localStorage.getItem("user"))
     const navigate = useNavigate()
+    const [isLoading, setIsLoading] = useState(true)
 
     const [watchlists, setWatchlists] = useState([])
 
@@ -16,9 +18,11 @@ const UserWatchlists = () => {
             const { response, err } = await watchlistApi.getAll(user._id)
             if (response) {
                 setWatchlists(response)
+                setIsLoading(false)
             }
             if (err) {
                 toast.error(err.message)
+                setIsLoading(false)
             }
         }
         fetchWatchlists()
@@ -69,18 +73,24 @@ const UserWatchlists = () => {
 
     return (
         <div className="user-watchlist-container">
-            {watchlists &&
-                watchlists.map((watchlist, i) => {
-                    return (
-                        <UserWatchlistItem
-                            key={i++}
-                            watchlist={watchlist}
-                            onNavigate={handleNavigate}
-                            onModify={handleModify}
-                            onDelete={handleDelete}
-                        />
-                    )
-                })}
+            {isLoading ? (
+                <Skeleton />
+            ) : (
+                <>
+                    {watchlists &&
+                        watchlists.map((watchlist, i) => {
+                            return (
+                                <UserWatchlistItem
+                                    key={i++}
+                                    watchlist={watchlist}
+                                    onNavigate={handleNavigate}
+                                    onModify={handleModify}
+                                    onDelete={handleDelete}
+                                />
+                            )
+                        })}
+                </>
+            )}
         </div>
     )
 }

@@ -53,7 +53,7 @@ function App() {
                     />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/google/:userId" element={<GoogleAuth />} />
+                    <Route path="/google/:userId" element={<GoogleAuth onUserUpdate={handleUserUpdate}/>} />
                     <Route
                         path="/profil"
                         element={

@@ -7,20 +7,25 @@ import WatchlistItem from "../../components/WatchlistItem"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSliders } from "@fortawesome/free-solid-svg-icons"
 import FloattingButton from "../../components/common/FloatingButton"
-import './index.css'
+import "./index.css"
+import { is } from "@react-spring/shared"
+import CardSkeleton from "../../components/common/CardSkeleton"
 
 const Watchlist = () => {
     const navigate = useNavigate()
     const { watchlistId } = useParams()
     const [watchlist, setWatchlist] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
     useEffect(() => {
         const fetchWatchlist = async () => {
             const { response, err } = await watchlistApi.get(watchlistId)
             if (response) {
                 setWatchlist(response)
+                setIsLoading(false)
             }
             if (err) {
                 toast.error(err.message)
+                setIsLoading(false)
             }
         }
         fetchWatchlist()
@@ -36,22 +41,25 @@ const Watchlist = () => {
         navigate(`/watchlist/update/${watchlistId}`)
     }
 
-    const handleUpadte = async() => {
-        const {response, err} = await watchlistApi.get(watchlistId)
-        if(response){
+    const handleUpadte = async () => {
+        const { response, err } = await watchlistApi.get(watchlistId)
+        if (response) {
             setWatchlist(response)
         }
-        if(err){
+        if (err) {
             toast.error(err.message)
         }
     }
 
-    const handleRemove = async(e, media) => {
-        const {response, err} = await watchlistApi.removeMedia(watchlistId, media)
-        if (response){
+    const handleRemove = async (e, media) => {
+        const { response, err } = await watchlistApi.removeMedia(
+            watchlistId,
+            media
+        )
+        if (response) {
             handleUpadte()
         }
-        if(err){
+        if (err) {
             toast.error(err.message)
         }
     }
@@ -62,29 +70,48 @@ const Watchlist = () => {
 
     return (
         <div>
-            <Title text="My watch list"/>
-            <div className="watch-list-container">
-                <div className="watch-list-header">
-                    {watchlist.title && watchlist.emoji && (
-                        <div className="watch-list-header-info">
-                            <em-emoji
-                                shortcodes={watchlist.emoji}
-                                size="2em"
-                            ></em-emoji>
-                            <div className="watch-list-header-title">{watchlist.title}</div>
-                            <button onClick={(e) => handleNavigateModify(e)} className="watch-list-header-button">
-                                <FontAwesomeIcon icon={faSliders} size="2x"/>
-                            </button>
-                        </div>
-                    )}
+            <Title text="My watch list" />
+            {isLoading ? (
+                <CardSkeleton />
+            ) : (
+                <div className="watch-list-container">
+                    <div className="watch-list-header">
+                        {watchlist.title && watchlist.emoji && (
+                            <div className="watch-list-header-info">
+                                <em-emoji
+                                    shortcodes={watchlist.emoji}
+                                    size="2em"
+                                ></em-emoji>
+                                <div className="watch-list-header-title">
+                                    {watchlist.title}
+                                </div>
+                                <button
+                                    onClick={(e) => handleNavigateModify(e)}
+                                    className="watch-list-header-button"
+                                >
+                                    <FontAwesomeIcon
+                                        icon={faSliders}
+                                        size="2x"
+                                    />
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                    <div className="watch-list-films">
+                        {watchlist.medias &&
+                            watchlist.medias.map((media, i) => {
+                                return (
+                                    <WatchlistItem
+                                        key={i++}
+                                        media={media}
+                                        onNavigate={handleNavigate}
+                                        onRemove={handleRemove}
+                                    />
+                                )
+                            })}
+                    </div>
                 </div>
-                <div className="watch-list-films">
-                    {watchlist.medias &&
-                        watchlist.medias.map((media, i) => {
-                            return <WatchlistItem  key={i++} media={media} onNavigate={handleNavigate} onRemove={handleRemove}/>
-                        })}
-                </div>
-            </div>
+            )}
             <FloattingButton onClick={() => handleAdd()} />
         </div>
     )

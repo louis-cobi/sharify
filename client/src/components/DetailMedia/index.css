@@ -3,6 +3,12 @@
     padding-inline: 4rem;
     margin-bottom: 10rem;
 }
+.skeleton-media__wrapper {
+    align-items: center;
+    padding-inline: 4rem;
+    margin-bottom: 10rem;
+    animation: scale 4s infinite;
+}
 
 .media__image {
     position: relative;
@@ -14,6 +20,15 @@
     margin-block: 3.5rem 1rem;
 }
 
+.skeleton-media__image {
+    position: relative;
+    width: 17rem;
+    height: 20rem;
+    border-radius: 1rem;
+    margin-block: 3.5rem 1rem;
+    background: #E5E4E2;
+}
+
 .media__title {
     font-size: 2rem;
     margin: 0;
@@ -21,6 +36,14 @@
     font-family: 'Work sans';
     align-self: flex-start;
     margin-bottom: 1rem;
+}
+
+.skeleton-media__title {
+    margin: 0;
+    margin-bottom: 1rem;
+    background: #E5E4E2;
+    width: 40vw;
+    height: 2rem;
 }
 
 .media__types {
@@ -35,6 +58,12 @@
     font-family: 'sudo';
     font-weight: bold;
 
+}
+
+.skeleton-media__types__title {
+    width: 4rem;
+    height: 1rem;
+    background: #E5E4E2;
 }
 
 .media__types__items {
@@ -54,6 +83,14 @@
     box-shadow: 0.2rem 0.2rem var(--color-primary);
 }
 
+.media__types__item {
+    margin: 0;
+    padding: .4rem;
+    border-radius: 1rem;
+    width: 3rem;
+    height: 1rem;
+}
+
 .media__overview {
     font-family: 'sudo';
     margin-bottom: 1rem;
@@ -63,9 +100,27 @@
     font-weight: bold;
 }
 
+.skeleton-media__overview__title {
+    width: 4rem;
+    height: 1rem;
+    background: #E5E4E2;
+}
+
+.skeleton-media__overview__description {
+    width: 100%;
+    height: 1rem;
+    background: #E5E4E2;
+}
+
 .media__btn {
     width: 100%;
     margin-bottom: 1rem;
+}
+
+.media__btn {
+    width: 100%;
+    height: 3rem;
+    border-radius: 1rem;
 }
 
 .dropdown-watchlist-item{

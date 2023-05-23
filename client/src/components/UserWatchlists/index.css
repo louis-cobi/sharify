@@ -17,7 +17,6 @@
     border-style: solid;
     box-shadow: 0.25rem 0.25rem var(--color-contrast);
     margin-bottom: 2em;
-    margin-bottom: 2em;
     font-family: sudo;
     font-weight: bold;
     color: var(--color-text);
@@ -45,4 +44,19 @@
     font-family: sudo;
     font-weight: bold;
     margin: 2rem;
+}
+
+.skeleton-watchlist-container{
+    margin-left: 10vw;
+    margin-right: 10vw;
+    animation: scale 4s infinite;
+}
+
+.skeleton-watchlist-item{
+    width: 80vw;
+    /*width: 18rem;*/
+    height: 4em;
+    border-radius: 1em;
+    margin-bottom: 2em;
+    background: #E5E4E2;
 }
