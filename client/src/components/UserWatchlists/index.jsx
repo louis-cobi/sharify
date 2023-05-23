@@ -4,7 +4,7 @@ import { toast } from "react-toastify"
 import watchlistApi from "../../api/modules/watchlist.api"
 import UserWatchlistItem from "./UserWatchlistItem"
 import "./index.css"
-import Skeleton from "./skeleton"
+import Skeleton from "./Skeleton"
 
 const UserWatchlists = () => {
     const user = JSON.parse(localStorage.getItem("user"))
