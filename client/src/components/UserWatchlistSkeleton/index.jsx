@@ -1,4 +1,4 @@
-const Skeleton = () => {
+const UserWatchlistSkeleton = () => {
     return (
         <div className="skeleton-watchlist-container">
             <div className="skeleton-watchlist-item"></div>
@@ -10,4 +10,4 @@ const Skeleton = () => {
     )
 }
 
-export default Skeleton
+export default UserWatchlistSkeleton

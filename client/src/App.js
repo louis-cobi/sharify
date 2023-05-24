@@ -15,7 +15,8 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Signup from "./pages/Signup"
 import Search from "./pages/Search"
-import DetailMedia from "./components/DetailMedia"
+// import DetailMedia from "./components/DetailMedia"
+import Detail from "./pages/Detail"
 import Watchlist from "./pages/Watchlist"
 import CreateWatchlist from "./pages/CreateWatchlist"
 import UpdateWatchlist from "./pages/UpdateWatchlist"
@@ -101,13 +102,13 @@ function App() {
                     <Route
                         path="/detail/:mediaType/:mediaId"
                         element={
-                            user ?( <DetailMedia />) : (<Navigate to={"/login"} />)
+                            user ?( <Detail />) : (<Navigate to={"/login"} />)
                         }
                     />
                     <Route
                         path="/detail/:mediaType/:mediaId/:watchlistId"
                         element={
-                            user ? <DetailMedia /> : <Navigate to={"/login"} />
+                            user ? <Detail /> : <Navigate to={"/login"} />
                         }
                     />
                     <Route

@@ -1,4 +1,6 @@
-const SkeletonDetail = () => {
+import "./index.css"
+
+const DetailMediaSkeleton = () => {
     return (
         <div className="skeleton-media__wrapper">
             <div className="skeleton-media__image"></div>
@@ -22,4 +24,4 @@ const SkeletonDetail = () => {
     )
 }
 
-export default SkeletonDetail
+export default DetailMediaSkeleton

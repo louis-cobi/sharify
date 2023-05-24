@@ -4,12 +4,10 @@ import { toast } from "react-toastify"
 import watchlistApi from "../../api/modules/watchlist.api"
 import UserWatchlistItem from "./UserWatchlistItem"
 import "./index.css"
-import Skeleton from "./Skeleton"
 
 const UserWatchlists = () => {
     const user = JSON.parse(localStorage.getItem("user"))
     const navigate = useNavigate()
-    const [isLoading, setIsLoading] = useState(true)
 
     const [watchlists, setWatchlists] = useState([])
 
@@ -18,23 +16,20 @@ const UserWatchlists = () => {
             const { response, err } = await watchlistApi.getAll(user._id)
             if (response) {
                 setWatchlists(response)
-                setIsLoading(false)
             }
             if (err) {
                 toast.error(err.message)
-                setIsLoading(false)
             }
         }
         fetchWatchlists()
     }, [user._id])
 
     const handleNavigate = (e, watchlistId) => {
-        e.preventDefault()
         navigate(`/watchlist/${watchlistId}`)
     }
 
     const handleModify = (e, watchlistId) => {
-        e.preventDefault()
+        e.stopPropagation()
         navigate(`/watchlist/update/${watchlistId}`)
     }
 
@@ -49,6 +44,7 @@ const UserWatchlists = () => {
     }
 
     const handleDelete = async (e, watchlistId) => {
+        e.stopPropagation()
         const { response, err } = await watchlistApi.delete(watchlistId)
         if (response) {
             toast.success(`${response.title} delete`)
@@ -73,24 +69,18 @@ const UserWatchlists = () => {
 
     return (
         <div className="user-watchlist-container">
-            {isLoading ? (
-                <Skeleton />
-            ) : (
-                <>
-                    {watchlists &&
-                        watchlists.map((watchlist, i) => {
-                            return (
-                                <UserWatchlistItem
-                                    key={i++}
-                                    watchlist={watchlist}
-                                    onNavigate={handleNavigate}
-                                    onModify={handleModify}
-                                    onDelete={handleDelete}
-                                />
-                            )
-                        })}
-                </>
-            )}
+            {watchlists &&
+                watchlists.map((watchlist, i) => {
+                    return (
+                        <UserWatchlistItem
+                            key={i++}
+                            watchlist={watchlist}
+                            onNavigate={handleNavigate}
+                            onModify={handleModify}
+                            onDelete={handleDelete}
+                        />
+                    )
+                })}
         </div>
     )
 }

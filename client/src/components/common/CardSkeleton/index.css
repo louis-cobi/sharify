@@ -3,7 +3,7 @@
     color: var(--color-text);
     margin: auto;
     border-radius: 1em;
-    animation: scale 4s infinite;
+    animation: skeleton-loading 1s linear infinite alternate;
     background: #E5E4E2;
     height: 56vh;
 }

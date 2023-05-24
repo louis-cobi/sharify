@@ -1,0 +1,15 @@
+
+.skeleton-watchlist-container{
+    margin-left: 10vw;
+    margin-right: 10vw;
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+.skeleton-watchlist-item{
+    width: 80vw;
+    /*width: 18rem;*/
+    height: 4em;
+    border-radius: 1em;
+    margin-bottom: 2em;
+    background: #E5E4E2;
+}

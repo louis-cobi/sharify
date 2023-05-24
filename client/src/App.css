@@ -8,7 +8,7 @@
     --color-text: #000000;
 }
 :root.darkMode {
-    --bg-color-primary: #1c1c1C;
+    --bg-color-primary: #1c1c1c;
     --bg-color-secondary: #000000;
     --color-contrast: #fdfaf4;
     --color-primary: #ffdc05;
@@ -55,15 +55,15 @@
     color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 button {
     color: black;
+}
+
+@keyframes skeleton-loading {
+    0% {
+        background-color: hsl(200, 10%, 85%);
+    }
+    100% {
+        background-color: hsl(200, 20%, 95%);
+    }
 }

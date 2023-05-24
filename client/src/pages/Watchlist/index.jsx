@@ -70,7 +70,7 @@ const Watchlist = () => {
 
     return (
         <div>
-            <Title text="My watch list" />
+            <Title text="Watchlist" />
             {isLoading ? (
                 <CardSkeleton />
             ) : (
