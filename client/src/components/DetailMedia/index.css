@@ -137,6 +137,10 @@
     box-shadow: 0.25rem 0.25rem var(--color-contrast);
 }
 
+.swiper-slide {
+    width: fit-content !important;
+}
+
 .swiper-slide img {
     width: 6rem;
     box-shadow: 0.25rem 0.25rem var(--color-contrast);

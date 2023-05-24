@@ -63,3 +63,7 @@
         transform: rotate(360deg);
     }
 }
+
+button {
+    color: black;
+}
