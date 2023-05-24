@@ -89,6 +89,14 @@
     align-items: center;
 }
 
+.media_platform_container{
+    display: flex;
+}
+
+.media_platform{
+    margin-right: 1rem;
+}
+
 .media_platform_img{
     width: 5rem;
     object-fit: cover;

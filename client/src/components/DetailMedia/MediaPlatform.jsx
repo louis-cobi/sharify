@@ -42,13 +42,13 @@ const MediaPlatform = ({ platforms, title }) => {
       );
 
     return (
-        <>
+        <div className="media_platform_container">
             {filteredPlatforms.map((platform) => (
                 <div className="media_platform" onClick={(e) => handleCLick(e, platform)}>
                     <img className="media_platform_img" src={tmdbConfigs.posterPath(platform.logo_path)} />
                 </div>
             ))}
-        </>
+        </div>
     )
 }
 
