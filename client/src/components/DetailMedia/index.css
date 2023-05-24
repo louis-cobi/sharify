@@ -12,6 +12,7 @@
     border-radius: 1rem;
     box-shadow: 0.5rem 0.5rem var(--color-contrast);
     margin-block: 3.5rem 1rem;
+    border-style: solid;
 }
 
 .media__title {
@@ -60,6 +61,7 @@
     padding: .4rem;
     border-radius: 1rem;
     width: fit-content;
+    border-style: solid;
 }
 
 .media__overview {
@@ -91,6 +93,7 @@
     width: 5rem;
     object-fit: cover;
     border-radius: 1rem;
+    border-style: solid;
     margin-block: 1rem 1rem;
     position: relative;
     box-shadow: 0.25rem 0.25rem var(--color-contrast);
@@ -106,6 +109,7 @@
     max-height: 20rem;
     object-fit: cover;
     border-radius: 1rem;
+    border-style: solid;
     margin-block: 1rem 0;
     position: relative;
 }
@@ -120,6 +124,8 @@
     max-height: 20rem;
     object-fit: cover;
     border-radius: 1rem;
+    border-style: solid;
     margin-block: 1rem 1rem;
     position: relative;
+    
 }
