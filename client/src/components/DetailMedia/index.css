@@ -130,4 +130,33 @@
 
 .media_platform_img{
     width: 5rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-block: 1rem 1rem;
+    position: relative;
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+}
+
+.swiper-slide img {
+    width: 6rem;
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+    max-height: 20rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-block: 1rem 0;
+    position: relative;
+}
+
+.swiper-slide p {
+    font-family: "sudo";
+}
+
+.swiper-slide iframe {
+    width: 12rem;
+    box-shadow: 0.25rem 0.25rem var(--color-contrast);
+    max-height: 20rem;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-block: 1rem 1rem;
+    position: relative;
 }

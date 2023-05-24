@@ -9,13 +9,8 @@
 }
 
 .emoji-picker-button {
-    background: var(--bg-color-secondary);
-    margin-left: 8%;
-    border: solid;
-    border-top-left-radius: 0.5em;
-    border-bottom-left-radius: 0.5em;
-    border-color: var(--color-contrast);
-    border-width: 0.15em;
+    background: none;
+    border: none;
 }
 
 .emoji-faFaceSmile {

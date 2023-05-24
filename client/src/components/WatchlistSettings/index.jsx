@@ -20,16 +20,18 @@ const WatchlistSettings = ({
         <div className="watchlist-settings-container">
             <div className="watchlist-settings-header">
                 <div className="watchlist-settings-header-infos">
-                    <EmojiPicker setEmoji={setEmoji} emoji={emoji}/>
-                    <input
-                        type="text"
-                        id="text-input"
-                        name="text-input"
-                        placeholder="Title"
-                        value={title}
-                        onChange={onChange}
-                        className="watchlist-settings-header-input"
-                    ></input>
+                    <div className="watchlist-settings-header-details">
+                        <EmojiPicker setEmoji={setEmoji} emoji={emoji}/>
+                        <input
+                            type="text"
+                            id="text-input"
+                            name="text-input"
+                            placeholder="Title"
+                            value={title}
+                            onChange={onChange}
+                            className="watchlist-settings-header-input"
+                        ></input>
+                    </div>
                 </div>
             </div>
             <div className="watchlist-settings-body">

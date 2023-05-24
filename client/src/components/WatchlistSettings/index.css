@@ -29,16 +29,23 @@
     width: 100%;
 }
 
+.watchlist-settings-header-details {
+    height: fit-content;
+    background: var(--bg-color-secondary);
+    border: solid;
+    border-color: var(--color-contrast);
+    border-radius: 0.5em;
+    border-width: 0.15em;
+    width: 100%;
+    display: flex;
+}
+
 .watchlist-settings-header-input {
     height: 2em;
     width: 100%;
     color: var(--color-text);
-    background-color: var(--bg-color-secondary);
-    border: var(--color-contrast) solid;
-    border-left: none;
-    border-top-right-radius: 0.5em;
-    border-bottom-right-radius: 0.5em;
-    border-width: 0.15em;
+    background-color: transparent;
+    border: none;
 }
 
 .watchlist-settings-body {
