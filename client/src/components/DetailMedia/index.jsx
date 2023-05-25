@@ -10,7 +10,7 @@ import { toast } from "react-toastify"
 import Button from "../common/Button"
 import Dropdown from "../common/Dropdown"
 import watchlistApi from "../../api/modules/watchlist.api"
-import UserWatchlistSkeleton from "../UserWatchlistSkeleton"
+import DetailMediaSkeleton from "../DetailMediaSkeleton"
 
 const DetailMedia = () => {
     const user = JSON.parse(localStorage.getItem("user"))
