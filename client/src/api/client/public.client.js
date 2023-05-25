@@ -33,7 +33,6 @@ const privateClient = {
                 "Content-Type": "application/json",
             },
             method: 'POST',
-            credentials: "include",
         }
         if (body) {
             options.body = JSON.stringify(body);
