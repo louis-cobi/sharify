@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import watchlistApi from "../../api/modules/watchlist.api"
 import { toast } from "react-toastify"
 import WatchlistSettings from "../../components/WatchlistSettings"
+import Title from "../../components/common/Title"
 
 const CreateWatchlist = () => {
     const navigate = useNavigate()
@@ -44,6 +45,7 @@ const CreateWatchlist = () => {
 
     return (
         <div>
+            <Title text="New Watchlist" />
             <WatchlistSettings
                 setEmoji={setEmoji}
                 emoji={emoji}
