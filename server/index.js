@@ -41,8 +41,8 @@ passportConfig(passport)
 app.use(
     cors({
         origin: "https://sharify-app.vercel.app",
-        // methods: ["POST", "PUT", "PATCH", "GET", "OPTIONS", "HEAD", "DELETE"],
-        // credentials: true,
+        methods: ["POST", "PUT", "PATCH", "GET", "OPTIONS", "HEAD", "DELETE"],
+        credentials: true,
     })
 )
 app.use("/api", routes)
