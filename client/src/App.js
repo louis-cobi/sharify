@@ -25,16 +25,17 @@ import ResetPassword from "./pages/ResetPassword"
 import Profil from "./pages/Profil"
 import GoogleAuth from "./pages/GoogleAuth"
 import DetailMediaSkeleton from "./components/DetailMediaSkeleton"
+import { useThemeContext } from "./hooks/useThemeContext"
 
 const DetailMedia = React.lazy(() => import("./components/DetailMedia"))
 
 function App() {
     init({ data })
     const { user } = useAuthContext()
+    const { darkMode } = useThemeContext()
 
     const [updateUser, setUpdateUser] = useState(false)
 
-    const darkMode = JSON.parse(localStorage.getItem("darkMode"))
 
     const handleUserUpdate = () => {
         setUpdateUser(true)
