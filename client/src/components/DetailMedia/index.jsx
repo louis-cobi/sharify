@@ -10,6 +10,7 @@ import { toast } from "react-toastify"
 import Button from "../common/Button"
 import Dropdown from "../common/Dropdown"
 import watchlistApi from "../../api/modules/watchlist.api"
+import UserWatchlistSkeleton from "../UserWatchlistSkeleton"
 
 const DetailMedia = () => {
     const user = JSON.parse(localStorage.getItem("user"))
@@ -147,6 +148,10 @@ const DetailMedia = () => {
             toast.error(err.message)
         }
     }
+
+    if (!media) {
+        return <DetailMediaSkeleton />;
+      }
 
     return (
         <div className="media__wrapper">

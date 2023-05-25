@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import watchlistApi from "../../api/modules/watchlist.api"
 import UserWatchlistItem from "./UserWatchlistItem"
+import UserWatchlistSkeleton from "../UserWatchlistSkeleton"
 import "./index.css"
 
 const UserWatchlists = () => {
@@ -10,6 +11,7 @@ const UserWatchlists = () => {
     const navigate = useNavigate()
 
     const [watchlists, setWatchlists] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
         const fetchWatchlists = async () => {
@@ -20,6 +22,7 @@ const UserWatchlists = () => {
             if (err) {
                 toast.error(err.message)
             }
+            setIsLoading(false) 
         }
         fetchWatchlists()
     }, [user._id])
@@ -53,6 +56,10 @@ const UserWatchlists = () => {
         if (err) {
             toast.error(err.message)
         }
+    }
+
+    if (isLoading) { 
+        return <UserWatchlistSkeleton />
     }
 
     if (watchlists.length === 0) {
