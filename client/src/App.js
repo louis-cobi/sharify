@@ -34,6 +34,8 @@ function App() {
 
     const [updateUser, setUpdateUser] = useState(false)
 
+    const darkMode = JSON.parse(localStorage.getItem("darkMode"))
+
     const handleUserUpdate = () => {
         setUpdateUser(true)
     }
@@ -42,12 +44,12 @@ function App() {
         <div className="App">
             <BrowserRouter>
                 <ToastContainer
-                    position="bottom-left"
+                    position="bottom-center"
                     autoClose={5000}
                     hideProgressBar={false}
                     newestOnTop={false}
                     closeOnClick
-                    //theme={themeMode}
+                    theme={darkMode ? "dark" : "light"}
                 />
                 <Header updateUser={updateUser} />
                 <Routes>
