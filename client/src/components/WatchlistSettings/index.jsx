@@ -1,7 +1,6 @@
 import EmojiPicker from "../common/EmojiPicker"
 import SearchUser from "../SearchUser"
 import "./index.css"
-import Title from "../common/Title"
 import Button from "../common/Button"
 
 const WatchlistSettings = ({
@@ -16,7 +15,6 @@ const WatchlistSettings = ({
     text}) => {
     return(
         <>
-        <Title text="New Watchlist"/>
         <div className="watchlist-settings-container">
             <div className="watchlist-settings-header">
                 <div className="watchlist-settings-header-infos">

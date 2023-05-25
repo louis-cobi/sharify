@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { useState } from "react"
+import React, { useState } from "react"
 import { useAuthContext } from "./hooks/useAuthContext"
 import data from "@emoji-mart/data"
 import { init } from "emoji-mart"
@@ -24,6 +24,9 @@ import SendResetPassword from "./pages/SendResetPassword"
 import ResetPassword from "./pages/ResetPassword"
 import Profil from "./pages/Profil"
 import GoogleAuth from "./pages/GoogleAuth"
+import DetailMediaSkeleton from "./components/DetailMediaSkeleton"
+
+const DetailMedia = React.lazy(() => import("./components/DetailMedia"))
 
 function App() {
     init({ data })
@@ -54,7 +57,10 @@ function App() {
                     />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<Signup />} />
-                    <Route path="/google/:userId" element={<GoogleAuth onUserUpdate={handleUserUpdate}/>} />
+                    <Route
+                        path="/google/:userId"
+                        element={<GoogleAuth onUserUpdate={handleUserUpdate} />}
+                    />
                     <Route
                         path="/profil"
                         element={
@@ -102,13 +108,29 @@ function App() {
                     <Route
                         path="/detail/:mediaType/:mediaId"
                         element={
-                            user ?( <Detail />) : (<Navigate to={"/login"} />)
+                            user ? (
+                                <React.Suspense
+                                    fallback={<DetailMediaSkeleton />}
+                                >
+                                    <DetailMedia />
+                                </React.Suspense>
+                            ) : (
+                                <Navigate to={"/login"} />
+                            )
                         }
                     />
                     <Route
                         path="/detail/:mediaType/:mediaId/:watchlistId"
                         element={
-                            user ? <Detail /> : <Navigate to={"/login"} />
+                            user ? (
+                                <React.Suspense
+                                    fallback={<DetailMediaSkeleton />}
+                                >
+                                    <DetailMedia />
+                                </React.Suspense>
+                            ) : (
+                                <Navigate to={"/login"} />
+                            )
                         }
                     />
                     <Route

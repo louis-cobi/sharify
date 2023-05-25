@@ -4,6 +4,7 @@ import watchlistApi from "../../api/modules/watchlist.api"
 import WatchlistSettings from "../../components/WatchlistSettings"
 import { toast } from "react-toastify"
 import CardSkeleton from "../../components/common/CardSkeleton"
+import Title from "../../components/common/Title"
 
 const CreateWatchlist = () => {
     const navigate = useNavigate()
@@ -67,6 +68,7 @@ const CreateWatchlist = () => {
 
     return (
         <div>
+            <Title text="Watchlist Settings" />
             {isLoading ? (
                 <CardSkeleton />
             ) : (
