@@ -3,7 +3,6 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 import http from "http"
 import mongoose from "mongoose"
-//import dotenv from 'dotenv';
 import "dotenv/config"
 import passport from "passport"
 import routes from "./routes/index.js"
@@ -11,12 +10,11 @@ import passportConfig from "./config/passport.js"
 import session from "express-session"
 import MongoStore from "connect-mongo"
 
-//dotenv.config();
+
 const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-// app.use(cookieParser())
 
 const sessionStore = MongoStore.create({
     mongoUrl: process.env.ATLAS_URI, // Remplacez par votre URL de connexion MongoDB
@@ -24,12 +22,6 @@ const sessionStore = MongoStore.create({
     mongooseConnection: mongoose.connection, // Connexion Mongoose à utiliser
 })
 
-// app.use(session({
-//     secret: process.env.TOKEN_SECRET,
-//     resave: false,
-//     saveUninitialized: false,
-//     store: MongoStore.create({ mongoUrl: process.env.ATLAS_URI, ttl:  60 * 100 }), //ttl: 7 days expiration
-//   }));
 app.use(
     session({
         secret: process.env.TOKEN_SECRET,
@@ -38,7 +30,7 @@ app.use(
         store: sessionStore,
         cookie: {
             sameSite: "none",
-            maxAge: 24 * 60 * 60 * 1000, // Durée de validité du cookie de session (24 heures dans cet exemple)
+            maxAge: 24 * 60 * 60 * 1000, // Durée de validité du cookie de session (24 heures)
         },
     })
 )
@@ -49,8 +41,8 @@ passportConfig(passport)
 app.use(
     cors({
         origin: "https://sharify-app.vercel.app",
-        methods: ["POST", "PUT", "PATCH", "GET", "OPTIONS", "HEAD", "DELETE"],
-        credentials: true,
+        // methods: ["POST", "PUT", "PATCH", "GET", "OPTIONS", "HEAD", "DELETE"],
+        // credentials: true,
     })
 )
 app.use("/api", routes)
