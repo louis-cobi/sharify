@@ -1,3 +1,5 @@
+import "./index.css"
+
 const UserWatchlistSkeleton = () => {
     return (
         <div className="skeleton-watchlist-container">
