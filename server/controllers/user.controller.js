@@ -26,7 +26,7 @@ const signup = async (req, res) => {
         const token = jsonwebtoken.sign(
             { data: user.id },
             process.env.TOKEN_SECRET,
-            { expiresIn: "6m" }
+            { expiresIn: "182d" }
         )
 
         user.password = undefined
@@ -59,7 +59,7 @@ const signin = async (req, res) => {
         const token = jsonwebtoken.sign(
             { data: user.id },
             process.env.TOKEN_SECRET,
-            { expiresIn: "6m" }
+            { expiresIn: "182d" }
         )
 
         user.password = undefined
@@ -173,7 +173,7 @@ const getSession = async (req, res) => {
         const token = jsonwebtoken.sign(
             { data: user.id },
             process.env.TOKEN_SECRET,
-            { expiresIn: "6m" }
+            { expiresIn: "182d" }
         )
         responseHandler.ok(res, {...user._doc, token})
     } catch (error){

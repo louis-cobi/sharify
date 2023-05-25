@@ -29,6 +29,7 @@
     border-style: solid;
     box-shadow: 0.25rem 0.25rem var(--color-contrast);
     padding: 0.4rem;
+    z-index: 99;
 }
 
 .dropdown-content-child {
